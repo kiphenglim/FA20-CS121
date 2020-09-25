@@ -30,6 +30,6 @@ def upload_file():
       filename = secure_filename(file.filename)
       fullPath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
       file.save(fullPath)
-      return render_template("index.html", uploaded_image_path = fullPath)
+      return render_template("index.html", uploadedImagePath = fullPath)
 
-  return render_template("index.html",uploaded_image_path = os.path.join('static', "uploadPH.jpg"))
+  return render_template("index.html",uploadedImagePath = os.path.join('static', "uploadPH.jpg"))
