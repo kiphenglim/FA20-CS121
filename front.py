@@ -33,3 +33,4 @@ def upload_file():
       return render_template("index.html", uploadedImagePath = fullPath)
 
   return render_template("index.html",uploadedImagePath = os.path.join('static', "uploadPH.jpg"))
+  
