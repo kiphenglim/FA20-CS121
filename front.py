@@ -1,11 +1,15 @@
 import os
-from flask import Flask, flash, request, redirect, url_for, render_template
+from flask import Flask, flash, jsonify, request, redirect, url_for, render_template
 from werkzeug.utils import secure_filename
+from fastai.basic_train import load_learner
+from fastai.vision import open_image
+from flask_cors import CORS,cross_origin
 
 UPLOAD_FOLDER = os.path.join('static', 'uploads')
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 app = Flask(__name__)
+CORS(app, support_credentials=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # Check if the file is an image (we might have to change this to only 1 type of extension for alpha)
 def allowedFile(filename):
@@ -32,3 +36,23 @@ def uploadFile():
       return render_template("index.html", uploadedImagePath = fullPath)
 
   return render_template("index.html",uploadedImagePath = os.path.join('static', "uploadPH.jpg"))
+
+# load the learner
+learn = load_learner(path='./models', file='fauvismUkiyoE.pkl')
+classes = learn.data.classes
+
+# makre prediction and load into json
+def predict_single(img_file):
+    # function to take image and return prediction
+    prediction = learn.predict(open_image(img_file))
+    probs_list = prediction[2].numpy()
+    return {
+        'category': classes[prediction[1].item()],
+        'probs': {c: round(float(probs_list[i]), 5) for (i, c) in enumerate(classes)}
+    }
+
+# route for prediction
+@app.route('/predict', methods=['POST'])
+def predict():
+    print("hello")
+    return jsonify(predict_single(request.files['image']))
