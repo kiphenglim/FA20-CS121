@@ -20,7 +20,7 @@ header {
   padding:1vw;
   font-size: 200%;
 }
-.panel{
+.panel {
   background-color: white;
   text-align: center;
   outline: 5px solid black;
@@ -28,6 +28,10 @@ header {
   margin-top: 8vh;
   float: left;
   font-size: 200%;
+}
+.check-boxes {
+  text-align: left;
+  padding-left: 5vw;
 }
 #options {
   width: 24vw;
