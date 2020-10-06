@@ -1,0 +1,66 @@
+body {
+  margin:0px;
+  background-color: cornflowerblue;
+}
+h1 {
+  margin:0;
+  font-family:"Verdana", sans-serif;
+}
+h2 {
+  font-family:"Verdana", sans-serif;
+}
+p {
+  text-align: left;
+  padding-left: 4vw;
+}
+header {
+  border-bottom: 5px outset black;
+  background-color: white;    
+  text-align: center;
+  padding:1vw;
+  font-size: 200%;
+}
+.panel {
+  background-color: white;
+  text-align: center;
+  outline: 5px solid black;
+  margin-left: 8vw;
+  margin-top: 8vh;
+  float: left;
+  font-size: 200%;
+}
+.check-boxes {
+  text-align: left;
+  padding-left: 5vw;
+}
+#options {
+  width: 24vw;
+  height: 73vh;
+}
+#upload {
+  width: 52vw;
+  height: 73vh;
+}
+#results {
+  width: 84vw;
+  height: 40vh;
+}
+#similar {
+  width: 84vw;
+  height: 40vh;
+  margin-bottom: 8vh;
+}
+.button {
+  background-color: mediumslateblue; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+#run-button {
+  font-size: 24px;
+}
+
