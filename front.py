@@ -39,21 +39,30 @@ def uploadFile():
   return render_template("index.html",uploadedImagePath = os.path.join('static', "uploadPH.jpg"))
 
 # load the learner
-learn = load_learner(path='./models', file='fauvismUkiyoE.pkl')
+learn = load_learner(path='./models', file='allStylesBasic.pkl')
 classes = learn.data.classes
+styleList = ['Abstract Expressionism', 'Action Painting', 'Analytical Cubism', 'Art Nouveau', 'Baroque', 'Color Field Painting', 'Contemporary Realism', 'Cubism', 'Early_Renaissance', 'Expressionism', 'Fauvism', 'High Renaissance', 'Impressionism', 'Mannerism Late Renaissance', 'Minimalism', 'Naive Art Primitivism', 'New Realism', 'Northern Renaissance', 'Pointillism', 'Pop Art', 'Post Impressionism', 'Realism', 'Rococo', 'Romanticism', 'Symbolism', 'Synthetic Cubism', 'Ukiyo e']
 
 # make prediction and load into json
 def predictStyleCategory(img_file):
   # function to take image and return prediction
   prediction = learn.predict(open_image(img_file))
   probs_list = prediction[2].numpy()
-  return "Predicted Category: " + str(classes[prediction[1].item()])
+  predictionKey = int(classes[prediction[1].item()])
+  return "Predicted Category: " + styleList[predictionKey]
 
 def predictStyleProb(img_file):
+  # function to take in image and return top 5 predictions
   prediction = learn.predict(open_image(img_file))
   probs_list = prediction[2].numpy()
-  probability = str({c: round(float(probs_list[i]), 5) for (i, c) in enumerate(classes)})
-  specialChars = ['{', '}', "'"]
+  probabilityRaw = {styleList[c]: round(float(probs_list[i]), 5) for (i, c) in enumerate(classes)}
+  
+  print(type(probabilityRaw))
+  probabilitySorted = sorted(probabilityRaw.items(), key=lambda x: x[1], reverse=True)
+
+  topFiveProb = str(probabilitySorted[:5])
+  specialChars = ['[', ']', "'"]
   for i in specialChars:
-    probability = probability.replace(i, "")
-  return "Probabilities: " + probability
+    topFiveProb = topFiveProb.replace(i, "")
+  
+  return "Top 5 Probabilities: " + topFiveProb
