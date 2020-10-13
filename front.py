@@ -7,6 +7,7 @@ from flask_cors import CORS,cross_origin
 
 UPLOAD_FOLDER = os.path.join('static', 'uploads')
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+IMAGE_PATH = ""
 
 app = Flask(__name__)
 CORS(app, support_credentials=True)
@@ -33,7 +34,7 @@ def uploadFile():
       filename = secure_filename(file.filename)
       fullPath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
       file.save(fullPath)
-      return render_template("index.html", uploadedImagePath = fullPath)
+      return render_template("index.html", uploadedImagePath = fullPath, stylePrediction=predictStyleCategory(file), styleProbability=predictStyleProb(file))
 
   return render_template("index.html",uploadedImagePath = os.path.join('static', "uploadPH.jpg"))
 
@@ -41,18 +42,18 @@ def uploadFile():
 learn = load_learner(path='./models', file='fauvismUkiyoE.pkl')
 classes = learn.data.classes
 
-# makre prediction and load into json
-def predict_single(img_file):
-    # function to take image and return prediction
-    prediction = learn.predict(open_image(img_file))
-    probs_list = prediction[2].numpy()
-    return {
-        'category': classes[prediction[1].item()],
-        'probs': {c: round(float(probs_list[i]), 5) for (i, c) in enumerate(classes)}
-    }
+# make prediction and load into json
+def predictStyleCategory(img_file):
+  # function to take image and return prediction
+  prediction = learn.predict(open_image(img_file))
+  probs_list = prediction[2].numpy()
+  return "Predicted Category: " + str(classes[prediction[1].item()])
 
-# route for prediction
-@app.route('/predict', methods=['POST'])
-def predict():
-    print("hello")
-    return jsonify(predict_single(request.files['image']))
+def predictStyleProb(img_file):
+  prediction = learn.predict(open_image(img_file))
+  probs_list = prediction[2].numpy()
+  probability = str({c: round(float(probs_list[i]), 5) for (i, c) in enumerate(classes)})
+  specialChars = ['{', '}', "'"]
+  for i in specialChars:
+    probability = probability.replace(i, "")
+  return "Probabilities: " + probability
