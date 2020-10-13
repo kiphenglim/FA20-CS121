@@ -23,16 +23,16 @@
     <h2>Upload Your Painting</h2>    
     <form method=post enctype=multipart/form-data>
       <input type=file name=file>
-      <input  class="button" type=submit value=Upload>
+      <input  class="button" type=submit value="Upload and Run" >
     </form>
     <img src="{{ uploadedImagePath }}" alt="Uploaded Image" height="60%">
-    <form>
-      <button  class="button" id="run-button" >Run</button>
-    </form>
   </div>
   
   <div class="panel" id="results">
     <h2>Results</h2>
+    <h3> Style </h3>
+    <p> {{ stylePrediction }} </p>
+    <p> {{ styleProbability }} </p>
     
   </div>
   <div class="panel" id="similar">
