@@ -12,6 +12,9 @@ IMAGE_PATH = ""
 app = Flask(__name__)
 CORS(app, support_credentials=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+
+app.debug = True
 # Check if the file is an image (we might have to change this to only 1 type of extension for alpha)
 def allowedFile(filename):
   return '.' in filename and \
@@ -35,7 +38,9 @@ def uploadFile():
       fullPath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
       file.save(fullPath)
       return render_template("index.html", uploadedImagePath = fullPath, stylePrediction=predictStyleCategory(file), styleProbability=predictStyleProb(file))
-
+    else:
+      flash('Please select a file with a .png, .jpg, .jpeg, or .gif extension')
+      
   return render_template("index.html",uploadedImagePath = os.path.join('static', "uploadPH.jpg"))
 
 # load the learner

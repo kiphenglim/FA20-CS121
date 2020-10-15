@@ -33,6 +33,11 @@ header {
   text-align: left;
   padding-left: 5vw;
 }
+.popup{
+  margin: 0;
+  padding: 20px;
+  background-color:red; /* Black w/ opacity */
+}
 #options {
   width: 24vw;
   height: 73vh;
@@ -63,4 +68,9 @@ header {
 #run-button {
   font-size: 24px;
 }
-
+#uploaded_image{
+  width: auto;
+    height: auto;
+    max-width: 40vw;
+    max-height: 40vh;
+}
