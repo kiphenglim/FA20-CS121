@@ -3,6 +3,17 @@
 <head>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/scroll.css') }}">
 </head>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class = "popup">
+      <ul>
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+{% endwith %}
 <body>
   <header>
     <h1>What's My Style?</h1>
@@ -25,7 +36,7 @@
       <input type=file name=file>
       <input  class="button" type=submit value=Upload>
     </form>
-    <img src="{{ uploadedImagePath }}" alt="Uploaded Image" height="60%">
+    <img src="{{ uploadedImagePath }}" id=uploaded_image alt="Uploaded Image" height="60%">
     <form>
       <button  class="button" id="run-button" >Run</button>
     </form>
