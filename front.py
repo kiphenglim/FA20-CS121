@@ -22,16 +22,27 @@ def allowedFile(filename):
 
 @app.route('/', methods=['GET', 'POST'])
 def uploadFile():
-  print("python called")
   if request.method == 'POST':
     # check if the post request has the file part
     print(request.form)
     style = False
     genre = False
     artist = False
+    predictStyle = ""
+    probStyle = ""
+    predictGenre = ""
+    probGenre = ""
+    predictArtist = ""
+    probArtist = ""
     styleh3 = ""
     genreh3 = ""
     artisth3 = ""
+
+    if 'file' not in request.files:
+      flash('No file part')
+      return redirect(request.url)
+
+    file = request.files['file']
 
     if 'style2' in request.form:
       style = True
@@ -51,10 +62,6 @@ def uploadFile():
       predictArtist = predictArtistCategory(file)
       probArtist = predictArtistProb(file)
 
-    if 'file' not in request.files:
-      flash('No file part')
-      return redirect(request.url)
-    file = request.files['file']
     # Check that the user selected a file
     if file.filename == '':
       flash('No selected file')
