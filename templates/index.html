@@ -32,8 +32,8 @@
   </div>
   <div class="panel" id="upload">
     <h2>Upload Your Painting</h2>    
-    <form method=post enctype=multipart/form-data>
-      <input type=file name=file>
+    <form enctype="multipart/form-data">
+      <input type="file" id="file" name="file" onsubmit="return postData()">
       <input  class="button" type=submit value="Upload and Run" >
     </form>
     <img src="{{ uploadedImagePath }}" id=uploaded_image alt="Uploaded Image" height="60%">
@@ -58,5 +58,5 @@
     <h2>Similar Paintings</h2>
     
   </div>
-  
+  <script src="js/scripts.js"></script>
 </body>
