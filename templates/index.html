@@ -22,18 +22,22 @@
     <h2>Settings</h2>
     <p>What's my:</p>
     <form class = check-boxes>
-      <input type="checkbox" id="style" name="style" value="style">
+      <input type="checkbox" id="style" name="style" value="style" onchange="updateBoxes('style','style2')">
       <label for="style"> Style</label><br>
-      <input type="checkbox" id="genre" name="genre" value="genre">
+      <input type="checkbox" id="genre" name="genre" value="genre" onchange="updateBoxes('genre','genre2')">
       <label for="genre"> Genre</label><br>
-      <input type="checkbox" id="artist" name="artist" value="artist">
+      <input type="checkbox" id="artist" name="artist" value="artist" onchange="updateBoxes('artist','artist2')">
       <label for="artist"> Artist</label><br><br>
     </form>
   </div>
   <div class="panel" id="upload">
     <h2>Upload Your Painting</h2>    
-    <form>
+    <form method=post enctype="multipart/form-data">
+      <input type="checkbox" class="invisible" id="style2" name="style2" value="style">
+      <input type="checkbox" class="invisible" id="genre2" name="genre2" value="genre">
+      <input type="checkbox" class="invisible" id="artist2" name="artist2" value="artist">
       <input type="file" id="file" name="file">
+      <input  class="button" type=submit value="Upload and Run" >
     </form>
     <button onclick="postData()" class="button"> Upload and Run</button>
     <img src="{{ uploadedImagePath }}" id=uploaded_image alt="Uploaded Image" height="60%">
@@ -41,22 +45,30 @@
   
   <div class="panel" id="results">
     <h2>Results</h2>
-    <h3> Style </h3>
-    <p> {{ stylePrediction }} </p>
-    <p> {{ styleProbability }} </p>
-
-    <h3> Genre </h3>
-    <p> {{ genrePrediction }} </p>
-    <p> {{ genreProbability }} </p>
-
-    <h3> Artist </h3>
-    <p> {{ artistPrediction }} </p>
-    <p> {{ artistProbability }} </p>
+    <div style="width: 62%;height: 20vh;margin: auto;">
+      <div class="floaty">
+        <h3> {{ styleTitle }} </h3>
+        <p> {{ stylePrediction }} </p>
+        <p> {{ styleProbability }} </p>
+      </div>
+  
+      <div class="floaty">
+        <h3> {{ genreTitle }} </h3>
+        <p> {{ genrePrediction }} </p>
+        <p> {{ genreProbability }} </p>
+      </div>
+  
+      <div class="floaty">
+        <h3> {{ artistTitle }} </h3>
+        <p> {{ artistPrediction }} </p>
+        <p> {{ artistProbability }} </p>
+      </div>
+    </div>
     
   </div>
   <div class="panel" id="similar">
     <h2>Similar Paintings</h2>
     
   </div>
-  <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/scripts.js')}}"></script>
 </body>

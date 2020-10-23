@@ -33,7 +33,7 @@ header {
   text-align: left;
   padding-left: 5vw;
 }
-.popup{
+.popup {
   margin: 0;
   padding: 20px;
   background-color:red; /* Black w/ opacity */
@@ -49,6 +49,8 @@ header {
 #results {
   width: 84vw;
   height: 40vh;
+  text-align: center;
+  justify-content: center;
 }
 #similar {
   width: 84vw;
@@ -68,9 +70,22 @@ header {
 #run-button {
   font-size: 24px;
 }
-#uploaded_image{
+#uploaded_image {
   width: auto;
-    height: auto;
-    max-width: 40vw;
-    max-height: 40vh;
+  height: auto;
+  max-width: 40vw;
+  max-height: 40vh;
+}
+.invisible {
+  width:0;
+  height:0;
+}
+.floaty {
+  float: left;
+  max-width: 25vw;
+  margin: 5vw;
+  margin-top: 0;
+}
+h3 {
+  margin-top:0;
 }
