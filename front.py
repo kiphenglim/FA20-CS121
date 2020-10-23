@@ -24,6 +24,32 @@ def allowedFile(filename):
 def uploadFile():
   if request.method == 'POST':
     # check if the post request has the file part
+    print(request.form)
+    style = False
+    genre = False
+    artist = False
+    styleh3 = ""
+    genreh3 = ""
+    artisth3 = ""
+
+    if 'style2' in request.form:
+      style = True
+      styleh3 = "Style"
+      predictStyle = predictStyleCategory(file)
+      probStyle = predictStyleProb(file)
+    
+    if 'genre2' in request.form:
+      genre = True
+      genreh3 = "Genre"
+      predictGenre = predictGenreCategory(file)
+      probGenre = predictGenreProb(file)
+    
+    if 'artist2' in request.form:
+      artist = True
+      artisth3 = "Artist"
+      predictArtist = predictArtistCategory(file)
+      probArtist = predictArtistProb(file)
+
     if 'file' not in request.files:
       flash('No file part')
       return redirect(request.url)
@@ -37,14 +63,15 @@ def uploadFile():
       filename = secure_filename(file.filename)
       fullPath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
       file.save(fullPath)
-      return render_template("index.html", uploadedImagePath = fullPath, stylePrediction=predictStyleCategory(file), styleProbability=predictStyleProb(file), genrePrediction=predictGenreCategory(file), genreProbability=predictGenreProb(file), artistPrediction=predictArtistCategory(file), artistProbability=predictArtistProb(file))
+      #return render_template("index.html", uploadedImagePath = fullPath, styleTitle=styleh3, genreTitle=genreh3, artistTitle=artisth3)
+      return render_template("index.html", uploadedImagePath = fullPath, stylePrediction=predictStyle, styleProbability=probStyle, genrePrediction=predictGenre, genreProbability=probGenre, artistPrediction=predictArtist, artistProbability=probArtist, styleTitle=styleh3, genreTitle=genreh3, artistTitle=artisth3)
     else:
       flash('Please select a file with a .png, .jpg, .jpeg, or .gif extension')
       
   return render_template("index.html",uploadedImagePath = os.path.join('static', "uploadPH.jpg"))
 
 ### STYLE ###
-# load the learner
+#load the learner
 styleLearn = load_learner(path='./models', file='allStylesBasic.pkl')
 styleClasses = styleLearn.data.classes
 styleList = ['Abstract Expressionism', 'Action Painting', 'Analytical Cubism', 'Art Nouveau', 'Baroque', 'Color Field Painting', 'Contemporary Realism', 'Cubism', 'Early_Renaissance', 'Expressionism', 'Fauvism', 'High Renaissance', 'Impressionism', 'Mannerism Late Renaissance', 'Minimalism', 'Naive Art Primitivism', 'New Realism', 'Northern Renaissance', 'Pointillism', 'Pop Art', 'Post Impressionism', 'Realism', 'Rococo', 'Romanticism', 'Symbolism', 'Synthetic Cubism', 'Ukiyo e']
