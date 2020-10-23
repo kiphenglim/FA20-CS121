@@ -5,6 +5,8 @@ function postData(){
         genre: document.getElementById("genre"),
         artist: document.getElementById("artist")
     }
-    fetch('/')
-    .then(data=>{return data.json()})
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", '/', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(data.json()));
 }
