@@ -1,4 +1,8 @@
+__pycache__
 __pycache__/commons.cpython-37.pyc
 __pycache__/front.cpython-37.pyc
 __pycache__/front.cpython-38.pyc
 __pycache__/inference.cpython-37.pyc
+
+*.pyc
+
