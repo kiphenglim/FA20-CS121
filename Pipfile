@@ -9,6 +9,7 @@ verify_ssl = true
 flask = "*"
 gunicorn = "*"
 requests = "*"
+fastai = "===1.0.61"
 
 [requires]
 python_version = "3.8"
