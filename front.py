@@ -80,7 +80,7 @@ def uploadFile():
 
 ### STYLE ###
 #load the learner
-styleLearn = load_learner(path='./models', file='allStylesBasic.pkl')
+styleLearn = load_learner(path='./models', file='style_unfreeze_300.pkl')
 styleClasses = styleLearn.data.classes
 styleList = ['Abstract Expressionism', 'Action Painting', 'Analytical Cubism', 'Art Nouveau', 'Baroque', 'Color Field Painting', 'Contemporary Realism', 'Cubism', 'Early_Renaissance', 'Expressionism', 'Fauvism', 'High Renaissance', 'Impressionism', 'Mannerism Late Renaissance', 'Minimalism', 'Naive Art Primitivism', 'New Realism', 'Northern Renaissance', 'Pointillism', 'Pop Art', 'Post Impressionism', 'Realism', 'Rococo', 'Romanticism', 'Symbolism', 'Synthetic Cubism', 'Ukiyo e']
 
@@ -110,7 +110,7 @@ def predictStyleProb(img_file):
 
 ### GENRE ###
 # load the learner
-genreLearn = load_learner(path='./models', file='allGenreBasic.pkl')
+genreLearn = load_learner(path='./models', file='genreLRChanged.pkl')
 genreClasses = genreLearn.data.classes
 
 # make prediction and load into json
