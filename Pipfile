@@ -11,6 +11,7 @@ gunicorn = "*"
 requests = "*"
 fastai = "===1.0.61"
 flask-cors = "*"
+torchvision = "===0.7.0"
 
 [requires]
 python_version = "3.8"
