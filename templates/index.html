@@ -16,18 +16,34 @@
 {% endwith %}
 <body>
   <header>
-    <h1>What's My Style?</h1>
+    <h1>Painting Classifier</h1>
   </header>
-  <div class="panel" id="options">
-    <h2>Settings</h2>
-    <p>What's my:</p>
-    <form class = check-boxes>
+  <div class="panel" id="about">
+    <h2>About</h2>
+    <p> Welcome to our art classification site! Upload a photo, choose how you want it to be classified, and our site will give you predictions about the categories your art could fall into and their probabilities.</p>
+    <p> For more detailed instructions on how to use this website and information on our categorization and models <a href="{{ url_for('instructions') }}">click here</a>!</p>
+  </div><div class="panel" id="options">
+    <h2>Classification Options</h2>
+    <h4>Select the classifications for your image:</h4>
+    <form class = check-boxes style="margin-left: -1em;font-size: 28pt">
       <input type="checkbox" id="style" name="style" value="style" onchange="updateBoxes('style','style2')">
       <label for="style"> Style</label><br>
+      <div id="description" style="font-size: 18pt; margin-left: -1em; margin-right: 1em; margin-top: -1em">
+        <p>Determined by characteristics of the piece (form, color, composition)
+        <br>Examples: Realism, Cubism</p><br>
+      </div>
       <input type="checkbox" id="genre" name="genre" value="genre" onchange="updateBoxes('genre','genre2')">
       <label for="genre"> Genre</label><br>
+      <div id="description" style="font-size: 18pt; margin-left: -1em; margin-right: 1em; margin-top: -1em"">
+        <p>Determined by subject matter of a piece
+        <br>Examples: Landscape, Still-Life</p><br>
+      </div>
       <input type="checkbox" id="artist" name="artist" value="artist" onchange="updateBoxes('artist','artist2')">
-      <label for="artist"> Artist</label><br><br>
+      <label for="artist"> Artist</label>
+      <div id="description" style="font-size: 18pt; margin-left: -1em; margin-right: 1em; margin-top: -1em"">
+        <p>Creators of pieces, whose pieces often have a signature look
+        <br>Examples: van Gogh, Monet, Da Vinci</p>
+      </div>
     </form>
   </div>
   <div class="panel" id="upload">
@@ -44,23 +60,26 @@
   
   <div class="panel" id="results">
     <h2>Results</h2>
-    <div style="width: 62%;height: 20vh;margin: auto;">
+    <div style="margin: auto;" >
       <div class="floaty">
         <h3> {{ styleTitle }} </h3>
-        <p> {{ stylePrediction }} </p>
+        <p><em> {{ stylePrediction }} </em></p>
         <p> {{ styleProbability }} </p>
+        <br>
       </div>
   
       <div class="floaty">
         <h3> {{ genreTitle }} </h3>
-        <p> {{ genrePrediction }} </p>
+        <p><em> {{ genrePrediction }} </em></p>
         <p> {{ genreProbability }} </p>
+        <br>
       </div>
   
       <div class="floaty">
         <h3> {{ artistTitle }} </h3>
-        <p> {{ artistPrediction }} </p>
+        <p><em> {{ artistPrediction }} </em></p>
         <p> {{ artistProbability }} </p>
+        <br>
       </div>
     </div>
     
