@@ -44,30 +44,38 @@
   
   <div class="panel" id="results">
     <h2>Results</h2>
-    <div style="width: 62%;height: 20vh;margin: auto;">
+    <div style="padding:auto;">
       <div class="floaty">
+        {% if styleTitle != "": %}
         <h3> {{ styleTitle }} </h3>
         <p> {{ stylePrediction }} </p>
         <p> {{ styleProbability }} </p>
+        {% endif %}
       </div>
   
       <div class="floaty">
+        {% if genreTitle != "": %}
         <h3> {{ genreTitle }} </h3>
         <p> {{ genrePrediction }} </p>
         <p> {{ genreProbability }} </p>
+        {% endif %}
       </div>
   
       <div class="floaty">
+        {% if artistTitle != "": %}
         <h3> {{ artistTitle }} </h3>
         <p> {{ artistPrediction }} </p>
         <p> {{ artistProbability }} </p>
+        {% endif %}
       </div>
     </div>
     
   </div>
   <div class="panel" id="similar">
     <h2>Similar Paintings</h2>
-    
+    {% for img in similarImages: %}
+    <img class="similarIMG" src="{{ img }}">
+    {% endfor %}
   </div>
   <script src="{{ url_for('static', filename='js/scripts.js')}}"></script>
 </body>
