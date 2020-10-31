@@ -17,15 +17,17 @@
 <body>
   <header>
     <h1>Painting Classifier</h1>
+    <h6 style="margin: 10px"> Get to know your piece's style, genre, and artist</h6>
   </header>
   <div class="panel" id="about">
     <h2>About</h2>
     <p> Welcome to our art classification site! Upload a photo, choose how you want it to be classified, and our site will give you predictions about the categories your art could fall into and their probabilities.</p>
     <p> For more detailed instructions on how to use this website and information on our categorization and models <a href="{{ url_for('instructions') }}">click here</a>!</p>
-  </div><div class="panel" id="options">
-    <h2>Classification Options</h2>
-    <h4>Select the classifications for your image:</h4>
-    <form class = check-boxes style="margin-left: -1em;font-size: 28pt">
+  </div>
+  <div class="panel" id="options">
+    <h2>Options</h2>
+    <h4 style = "font-size: 30pt">Select classifications for your image:</h4>
+    <form class = check-boxes style="margin-left: -1em;font-size: 26pt">
       <input type="checkbox" id="style" name="style" value="style" onchange="updateBoxes('style','style2')">
       <label for="style"> Style</label><br>
       <div id="description" style="font-size: 18pt; margin-left: -1em; margin-right: 1em; margin-top: -1em">
