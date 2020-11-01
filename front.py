@@ -31,7 +31,6 @@ def instructions():
 def uploadFile():
   if request.method == 'POST':
     # check if the post request has the file part
-    print(request.form)
     style = False
     genre = False
     artist = False
