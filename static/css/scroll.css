@@ -14,13 +14,14 @@ p {
   padding-left: 4vw;
 }
 header {
-  background-color: #6794AA;    
+  background-color: #6794AA;  
+  color: white;  
   text-align: center;
   padding:1vw;
   font-size: 200%;
   position: fixed;
   width: 100%;
-  border-radius: 0px 0px 15px 15px;
+  margin-top: 1em;
 }
 .panel {
   background-color: white;
@@ -43,7 +44,7 @@ header {
 }
 
 #about {
-  margin-top: 5vw;
+  margin-top: 10vw;
   width: 84vw;
   text-indent: 3vw;
 }
@@ -62,7 +63,7 @@ header {
 }
 
 #upload {
-  width: 40vw;
+  width: 44vw;
   height: 78vh;
   margin-right: 8vw;
   margin-left: 2vw;
