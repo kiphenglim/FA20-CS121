@@ -16,7 +16,8 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 app.debug = True
-# Check if the file is an image (we might have to change this to only 1 type of extension for alpha)
+# Check if the file is an image
+# We might have to change this to only 1 type of extension for alpha
 
 
 def allowedFile(filename):
@@ -101,8 +102,14 @@ def getImages(query):
 # load the learner
 styleLearn = load_learner(path='./models', file='style_unfreeze_300.pkl')
 styleClasses = styleLearn.data.classes
-styleList = ['Abstract Expressionism', 'Action Painting', 'Analytical Cubism', 'Art Nouveau', 'Baroque', 'Color Field Painting', 'Contemporary Realism', 'Cubism', 'Early_Renaissance', 'Expressionism', 'Fauvism', 'High Renaissance', 'Impressionism',
-             'Mannerism Late Renaissance', 'Minimalism', 'Naive Art Primitivism', 'New Realism', 'Northern Renaissance', 'Pointillism', 'Pop Art', 'Post Impressionism', 'Realism', 'Rococo', 'Romanticism', 'Symbolism', 'Synthetic Cubism', 'Ukiyo e']
+styleList = ['Abstract Expressionism', 'Action Painting', 'Analytical Cubism', 
+            'Art Nouveau', 'Baroque', 'Color Field Painting',
+            'Contemporary Realism', 'Cubism', 'Early_Renaissance', 
+            'Expressionism', 'Fauvism', 'High Renaissance', 'Impressionism',
+            'Mannerism Late Renaissance', 'Minimalism', 
+            'Naive Art Primitivism', 'New Realism', 'Northern Renaissance', 
+            'Pointillism', 'Pop Art', 'Post Impressionism', 'Realism', 
+            'Rococo', 'Romanticism', 'Symbolism', 'Synthetic Cubism', 'Ukiyo e']
 
 # make prediction and load into json
 
