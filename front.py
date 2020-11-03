@@ -1,5 +1,5 @@
 import os
-from flask import Flask, flash, jsonify, request, redirect, url_for, render_template
+from flask import Flask, flash, request, redirect, render_template
 from werkzeug.utils import secure_filename
 from fastai.basic_train import load_learner
 from fastai.vision import open_image
