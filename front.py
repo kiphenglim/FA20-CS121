@@ -59,14 +59,14 @@ def uploadFile():
         styleProbability = predictStyleProb(file)
         query = stylePrediction + 'paintings'
         similarImages += getImages(query)
-    
+
     if 'genre2' in request.form:
         genreTitle = "Genre"
         genrePrediction = predictGenreCategory(file)
         genreProbability = predictGenreProb(file)
         query = genrePrediction + 'paintings'
         similarImages += getImages(query)
-    
+
     if 'artist2' in request.form:
         artistTitle = "Artist"
         artistPrediction = predictArtistCategory(file)
@@ -87,7 +87,7 @@ def uploadFile():
     else:
         flash('Please select a file with a .png, .jpg, .jpeg, or .gif extension')
       
-  return render_template("index.html",uploadedImagePath = os.path.join('static', "uploadPH.jpg"))
+    return render_template("index.html",uploadedImagePath = os.path.join('static', "uploadPH.jpg"))
 
 ### Google API helper ###
 def getImages(query):
@@ -95,20 +95,20 @@ def getImages(query):
     req = requests.get('https://www.googleapis.com/customsearch/v1?key=AIzaSyB_cvfozOcU8r34KrvayV82thQqlAv74PA&cx=354adf1e91b6d54cb&searchType=image&num=3&q='+query).json()
     for img in req["items"]:
         results.append(img["link"])
-  
+
     return results
 
 ### STYLE ###
 # load the learner
 styleLearn = load_learner(path='./models', file='style_unfreeze_300.pkl')
 styleClasses = styleLearn.data.classes
-styleList = ['Abstract Expressionism', 'Action Painting', 'Analytical Cubism', 
+styleList = ['Abstract Expressionism', 'Action Painting', 'Analytical Cubism',
             'Art Nouveau', 'Baroque', 'Color Field Painting',
-            'Contemporary Realism', 'Cubism', 'Early_Renaissance', 
+            'Contemporary Realism', 'Cubism', 'Early_Renaissance',
             'Expressionism', 'Fauvism', 'High Renaissance', 'Impressionism',
-            'Mannerism Late Renaissance', 'Minimalism', 
-            'Naive Art Primitivism', 'New Realism', 'Northern Renaissance', 
-            'Pointillism', 'Pop Art', 'Post Impressionism', 'Realism', 
+            'Mannerism Late Renaissance', 'Minimalism',
+            'Naive Art Primitivism', 'New Realism', 'Northern Renaissance',
+            'Pointillism', 'Pop Art', 'Post Impressionism', 'Realism',
             'Rococo', 'Romanticism', 'Symbolism', 'Synthetic Cubism', 'Ukiyo e']
 
 # make prediction and load into json
