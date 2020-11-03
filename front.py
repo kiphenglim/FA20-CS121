@@ -21,6 +21,12 @@ def allowedFile(filename):
   return '.' in filename and \
     filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+@app.route('/instructions', methods=['GET', 'POST'])
+def instructions():
+    if request.method == 'POST':
+        return render_template('index.html')
+    return render_template('instructions.html')
+
 @app.route('/', methods=['GET', 'POST'])
 def uploadFile():
   if request.method == 'POST':
@@ -89,7 +95,7 @@ def getImages(query):
 
 ### STYLE ###
 #load the learner
-styleLearn = load_learner(path='./models', file='allStylesBasic.pkl')
+styleLearn = load_learner(path='./models', file='style_unfreeze_300.pkl')
 styleClasses = styleLearn.data.classes
 styleList = ['Abstract Expressionism', 'Action Painting', 'Analytical Cubism', 'Art Nouveau', 'Baroque', 'Color Field Painting', 'Contemporary Realism', 'Cubism', 'Early_Renaissance', 'Expressionism', 'Fauvism', 'High Renaissance', 'Impressionism', 'Mannerism Late Renaissance', 'Minimalism', 'Naive Art Primitivism', 'New Realism', 'Northern Renaissance', 'Pointillism', 'Pop Art', 'Post Impressionism', 'Realism', 'Rococo', 'Romanticism', 'Symbolism', 'Synthetic Cubism', 'Ukiyo e']
 
@@ -98,14 +104,14 @@ def predictStyleCategory(img_file):
   # function to take image and return prediction
   prediction = styleLearn.predict(open_image(img_file))
   probs_list = prediction[2].numpy()
-  predictionKey = int(styleClasses[prediction[1].item()])
-  return "Predicted Category: " + styleList[predictionKey]
+  predictionKey = styleClasses[prediction[1].item()]
+  return "Predicted Category: " + str(predictionKey)
 
 def predictStyleProb(img_file):
   # function to take in image and return top 5 predictions
   prediction = styleLearn.predict(open_image(img_file))
   probs_list = prediction[2].numpy()
-  probabilityRaw = {styleList[c]: round(float(probs_list[i]), 5) for (i, c) in enumerate(styleClasses)}
+  probabilityRaw = {c: round(float(probs_list[i]), 5) for (i, c) in enumerate(styleClasses)}
   
   probabilitySorted = sorted(probabilityRaw.items(), key=lambda x: x[1], reverse=True)
 
@@ -119,7 +125,7 @@ def predictStyleProb(img_file):
 
 ### GENRE ###
 # load the learner
-genreLearn = load_learner(path='./models', file='allGenreBasic.pkl')
+genreLearn = load_learner(path='./models', file='genreLRChanged.pkl')
 genreClasses = genreLearn.data.classes
 
 # make prediction and load into json
@@ -147,7 +153,7 @@ def predictGenreProb(img_file):
 
 ### ARTIST ###
 # load the learner
-artistLearn = load_learner(path='./models', file='fauvismUkiyoE.pkl')
+artistLearn = load_learner(path='./models', file='artistLR2.pkl')
 artistClasses = artistLearn.data.classes
 
 # make prediction and load into json

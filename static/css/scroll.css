@@ -38,12 +38,25 @@ header {
   padding: 20px;
   background-color:red; /* Black w/ opacity */
 }
+
+#about {
+  width: 84vw;
+  text-indent: 3vw;
+}
+
 #options {
-  width: 24vw;
+  width: 32vw;
   height: 73vh;
 }
+
+.description {
+  margin-left:-10vw;
+  margin-right: 5vw;
+  font-size: 12pt;
+}
+
 #upload {
-  width: 52vw;
+  width: 48vw;
   height: 73vh;
 }
 #results {
@@ -81,10 +94,10 @@ header {
   height:0;
 }
 .floaty {
-  float: left;
-  max-width: 25vw;
-  margin: 4vw;
+  float: center;
+  max-width: 100%;
   margin-top: 0;
+  text-align: center
 }
 h3 {
   margin-top:0;
