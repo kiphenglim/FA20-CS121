@@ -71,12 +71,13 @@ header {
 }
 #results {
   width: 84vw;
+  min-height: 40vh;
   text-align: center;
   justify-content: center;
 }
 #similar {
   width: 84vw;
-  height: 40vh;
+  min-height: 40vh;
   margin-bottom: 8vh;
 }
 .button {
@@ -110,4 +111,11 @@ header {
 }
 h3 {
   margin-top:0;
+}
+.similarIMG {
+  float: left;
+  margin-left: 5vw;
+  margin-bottom: 5vh;
+  max-width: 27vw;
+  max-height: 27vh;
 }

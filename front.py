@@ -5,6 +5,7 @@ from werkzeug.utils import secure_filename
 from fastai.basic_train import load_learner
 from fastai.vision import open_image
 from flask_cors import CORS,cross_origin
+import requests
 
 UPLOAD_FOLDER = os.path.join('static', 'uploads')
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
@@ -31,18 +32,16 @@ def instructions():
 def uploadFile():
   if request.method == 'POST':
     # check if the post request has the file part
-    style = False
-    genre = False
-    artist = False
-    predictStyle = ""
-    probStyle = ""
-    predictGenre = ""
-    probGenre = ""
-    predictArtist = ""
-    probArtist = ""
-    styleh3 = ""
-    genreh3 = ""
-    artisth3 = ""
+    stylePrediction = ""
+    styleProbability = ""
+    genrePrediction = ""
+    genreProbability = ""
+    artistPrediction = ""
+    artistProbability = ""
+    styleTitle = ""
+    genreTitle = ""
+    artistTitle = ""
+    similarImages = []
 
     if 'file' not in request.files:
       flash('No file part')
@@ -51,22 +50,25 @@ def uploadFile():
     file = request.files['file']
 
     if 'style2' in request.form:
-      style = True
-      styleh3 = "Style"
-      predictStyle = predictStyleCategory(file)
-      probStyle = predictStyleProb(file)
+      styleTitle = "Style"
+      stylePrediction = predictStyleCategory(file)
+      styleProbability = predictStyleProb(file)
+      query = stylePrediction + 'paintings'
+      similarImages += getImages(query)
     
     if 'genre2' in request.form:
-      genre = True
-      genreh3 = "Genre"
-      predictGenre = predictGenreCategory(file)
-      probGenre = predictGenreProb(file)
+      genreTitle = "Genre"
+      genrePrediction = predictGenreCategory(file)
+      genreProbability = predictGenreProb(file)
+      query = genrePrediction + 'paintings'
+      similarImages += getImages(query)
     
     if 'artist2' in request.form:
-      artist = True
-      artisth3 = "Artist"
-      predictArtist = predictArtistCategory(file)
-      probArtist = predictArtistProb(file)
+      artistTitle = "Artist"
+      artistPrediction = predictArtistCategory(file)
+      artistProbability = predictArtistProb(file)
+      query = artistPrediction + 'paintings'
+      similarImages += getImages(query)
 
     # Check that the user selected a file
     if file.filename == '':
@@ -75,14 +77,14 @@ def uploadFile():
     # Actually upload a file and reload the page with the file displayed
     if file and allowedFile(file.filename):
       filename = secure_filename(file.filename)
-      fullPath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-      file.save(fullPath)
-      #return render_template("index.html", uploadedImagePath = fullPath, styleTitle=styleh3, genreTitle=genreh3, artistTitle=artisth3)
-      return render_template("index.html", uploadedImagePath = fullPath, stylePrediction=predictStyle, styleProbability=probStyle, genrePrediction=predictGenre, genreProbability=probGenre, artistPrediction=predictArtist, artistProbability=probArtist, styleTitle=styleh3, genreTitle=genreh3, artistTitle=artisth3)
+      uploadedImagePath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+      file.save(uploadedImagePath)
+      return render_template("index.html", **locals())
     else:
       flash('Please select a file with a .png, .jpg, .jpeg, or .gif extension')
       
   return render_template("index.html",uploadedImagePath = os.path.join('static', "uploadPH.jpg"))
+
 
 def correctRound(arr, num):
   newList = []
@@ -91,6 +93,15 @@ def correctRound(arr, num):
     decimal.getcontext().prec=num
     newList.append(d*1)
   return newList
+
+### Google API helper ###
+def getImages(query):
+  results = []
+  req = requests.get('https://www.googleapis.com/customsearch/v1?key=AIzaSyB_cvfozOcU8r34KrvayV82thQqlAv74PA&cx=354adf1e91b6d54cb&searchType=image&num=3&q='+query).json()
+  for img in req["items"]:
+    results.append(img["link"])
+  
+  return results
 
 ### STYLE ###
 #load the learner
