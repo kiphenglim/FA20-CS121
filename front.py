@@ -57,43 +57,45 @@ def upload_file():
         artist_title = ""
         similar_images = []
 
-    if 'file' not in request.files:
-        flash('No file part')
-        return redirect(request.url)
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
 
-    file = request.files['file']
+        file = request.files['file']
 
-    if 'style2' in request.form:
-        style_title = "Style"
-        style_prediction = predict_style_category(file)
-        style_probability = predict_style_prob(file)
-        query = style_prediction + 'paintings'
-        similar_images += get_images(query)
+        if 'style2' in request.form:
+            style_title = "Style"
+            style_prediction = predict_style_category(file)
+            style_probability = predict_style_prob(file)
+            query = style_prediction + 'paintings'
+            similar_images += get_images(query)
 
-    if 'genre2' in request.form:
-        genre_title = "Genre"
-        genre_prediction = predict_genre_category(file)
-        genre_probability = predict_genre_prob(file)
-        query = genre_prediction + 'paintings'
-        similar_images += get_images(query)
+        if 'genre2' in request.form:
+            genre_title = "Genre"
+            genre_prediction = predict_genre_category(file)
+            genre_probability = predict_genre_prob(file)
+            query = genre_prediction + 'paintings'
+            similar_images += get_images(query)
 
-    if 'artist2' in request.form:
-        artist_title = "Artist"
-        artist_prediction = predict_artist_category(file)
-        artist_probability = predict_artist_prob(file)
-        query = artist_prediction + 'paintings'
-        similar_images += get_images(query)
+        if 'artist2' in request.form:
+            artist_title = "Artist"
+            artist_prediction = predict_artist_category(file)
+            artist_probability = predict_artist_prob(file)
+            query = artist_prediction + 'paintings'
+            similar_images += get_images(query)
 
-    # Check that the user selected a file
-    if file.filename == '':
-        flash('No selected file')
-        return redirect(request.url)
-    # Actually upload a file and reload the page with the file displayed
-    if file and allowed_file(file.filename):
-        filename = secure_filename(file.filename)
-        uploaded_image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-        file.save(uploaded_image_path)
-        return render_template("index.html", **locals())
+        # Check that the user selected a file
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        # Actually upload a file and reload the page with the file displayed
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            uploaded_image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            file.save(uploaded_image_path)
+            return render_template("index.html", **locals())
+        else:
+            flash('Please select a file with a .png, .jpg, .jpeg, or .gif extension')
 
     flash('Please select a file with a .png, .jpg, .jpeg, or .gif extension')
     return render_template("index.html",uploadedImagePath = os.path.join('static', "uploadPH.jpg"))
