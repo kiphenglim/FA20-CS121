@@ -3,7 +3,7 @@ from flask import Flask, flash, request, redirect, render_template
 from werkzeug.utils import secure_filename
 from fastai.basic_train import load_learner
 from fastai.vision import open_image
-from flask_cors import CORS, cross_origin
+from flask_cors import CORS
 import requests
 
 UPLOAD_FOLDER = os.path.join('static', 'uploads')
