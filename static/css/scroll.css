@@ -1,6 +1,6 @@
 body {
   margin:0px;
-  background-color: cornflowerblue;
+  background-color: #DDDAEE;
 }
 h1 {
   margin:0;
@@ -14,20 +14,24 @@ p {
   padding-left: 4vw;
 }
 header {
-  border-bottom: 5px outset black;
-  background-color: white;    
+  background-color: #6794AA;  
+  color: white;  
   text-align: center;
   padding:1vw;
   font-size: 200%;
+  position: fixed;
+  width: 100%;
 }
 .panel {
   background-color: white;
   text-align: center;
-  outline: 5px solid black;
   margin-left: 8vw;
   margin-top: 8vh;
+  margin-right: 8vw;
   float: left;
   font-size: 200%;
+  border-radius: 15px;
+  padding-right: 1em;
 }
 .check-boxes {
   text-align: left;
@@ -36,17 +40,21 @@ header {
 .popup {
   margin: 0;
   padding: 20px;
-  background-color:red; /* Black w/ opacity */
+  background-color:#9782D2; /* Black w/ opacity */
+  position: fixed;
 }
 
 #about {
+  margin-top: 10em;
   width: 84vw;
   text-indent: 3vw;
 }
 
 #options {
-  width: 32vw;
-  height: 73vh;
+  width: 34vw;
+  height: 78vh;
+  margin-left: 8vw;
+  margin-right: 2vw;
 }
 
 .description {
@@ -56,8 +64,10 @@ header {
 }
 
 #upload {
-  width: 48vw;
-  height: 73vh;
+  width: 44vw;
+  height: 78vh;
+  margin-right: 8vw;
+  margin-left: 2vw;
 }
 #results {
   width: 84vw;
@@ -71,7 +81,7 @@ header {
   margin-bottom: 8vh;
 }
 .button {
-  background-color: mediumslateblue; /* Green */
+  background-color: #6794AA; /* Green */
   border: none;
   color: white;
   padding: 15px 32px;
