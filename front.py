@@ -1,4 +1,5 @@
 import os
+import decimal
 from flask import Flask, flash, jsonify, request, redirect, url_for, render_template
 from werkzeug.utils import secure_filename
 from fastai.basic_train import load_learner
@@ -84,6 +85,15 @@ def uploadFile():
       
   return render_template("index.html",uploadedImagePath = os.path.join('static', "uploadPH.jpg"))
 
+
+def correctRound(arr, num):
+  newList = []
+  for value in arr:
+    d = decimal.Decimal(str(value))
+    decimal.getcontext().prec=num
+    newList.append(d*1)
+  return newList
+
 ### Google API helper ###
 def getImages(query):
   results = []
@@ -110,17 +120,18 @@ def predictStyleCategory(img_file):
 def predictStyleProb(img_file):
   # function to take in image and return top 5 predictions
   prediction = styleLearn.predict(open_image(img_file))
-  probs_list = prediction[2].numpy()
-  probabilityRaw = {c: round(float(probs_list[i]), 5) for (i, c) in enumerate(styleClasses)}
-  
-  probabilitySorted = sorted(probabilityRaw.items(), key=lambda x: x[1], reverse=True)
+  probList = prediction[2].numpy()
+  probSorted = sorted(probList, key=lambda x: float(x), reverse=True)
+  probRounded = correctRound(probSorted, 2)
+  percentDict = {c: str(100*probRounded[i]) + "%" for (i, c) in enumerate(styleClasses)}
+  percentList = [str(i).replace(',',':') for i in list(percentDict.items())]
 
-  topFiveProb = str(probabilitySorted[:5])
-  specialChars = ['[', ']', "'"]
+  topFive = str(percentList[:5])
+  specialChars = ['[', ']', "'", '"']
   for i in specialChars:
-    topFiveProb = topFiveProb.replace(i, "")
+    topFive = topFive.replace(i, "")
   
-  return "Top 5 Probabilities: " + topFiveProb
+  return "Top 5 Probabilities: " + topFive
 
 
 ### GENRE ###
@@ -139,17 +150,18 @@ def predictGenreCategory(img_file):
 def predictGenreProb(img_file):
   # function to take in image and return top 5 predictions
   prediction = genreLearn.predict(open_image(img_file))
-  probs_list = prediction[2].numpy()
-  probabilityRaw = {c: round(float(probs_list[i]), 5) for (i, c) in enumerate(genreClasses)}
-  
-  probabilitySorted = sorted(probabilityRaw.items(), key=lambda x: x[1], reverse=True)
+  probList = prediction[2].numpy()
+  probSorted = sorted(probList, key=lambda x: float(x), reverse=True)
+  probRounded = correctRound(probSorted, 2)
+  percentDict = {c: str(100*probRounded[i]) + "%" for (i, c) in enumerate(genreClasses)}
+  percentList = [str(i).replace(',',':') for i in list(percentDict.items())]
 
-  topFiveProb = str(probabilitySorted[:5])
-  specialChars = ['[', ']', "'"]
+  topFive = str(percentList[:5])
+  specialChars = ['[', ']', "'", '"']
   for i in specialChars:
-    topFiveProb = topFiveProb.replace(i, "")
+    topFive = topFive.replace(i, "")
   
-  return "Top 5 Probabilities: " + topFiveProb
+  return "Top 5 Probabilities: " + topFive
 
 ### ARTIST ###
 # load the learner
@@ -167,14 +179,15 @@ def predictArtistCategory(img_file):
 def predictArtistProb(img_file):
   # function to take in image and return top 5 predictions
   prediction = artistLearn.predict(open_image(img_file))
-  probs_list = prediction[2].numpy()
-  probabilityRaw = {c: round(float(probs_list[i]), 5) for (i, c) in enumerate(artistClasses)}
-  
-  probabilitySorted = sorted(probabilityRaw.items(), key=lambda x: x[1], reverse=True)
+  probList = prediction[2].numpy()
+  probSorted = sorted(probList, key=lambda x: float(x), reverse=True)
+  probRounded = correctRound(probSorted, 2)
+  percentDict = {c: str(100*probRounded[i]) + "%" for (i, c) in enumerate(artistClasses)}
+  percentList = [str(i).replace(',',':') for i in list(percentDict.items())]
 
-  topFiveProb = str(probabilitySorted[:5])
-  specialChars = ['[', ']', "'"]
+  topFive = str(percentList[:5])
+  specialChars = ['[', ']', "'", '"']
   for i in specialChars:
-    topFiveProb = topFiveProb.replace(i, "")
+    topFive = topFive.replace(i, "")
   
-  return "Top 5 Probabilities: " + topFiveProb
+  return "Top 5 Probabilities: " + topFive
