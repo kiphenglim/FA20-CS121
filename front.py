@@ -20,7 +20,7 @@ app.debug = True
 # We might have to change this to only 1 type of extension for alpha
 
 
-def allowedFile(filename):
+def allowed_file(filename):
     return '.' in filename and \
         filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
@@ -33,19 +33,19 @@ def instructions():
 
 
 @app.route('/', methods=['GET', 'POST'])
-def uploadFile():
+def upload_file():
     if request.method == 'POST':
         # check if the post request has the file part
-        stylePrediction = ""
-        styleProbability = ""
-        genrePrediction = ""
-        genreProbability = ""
-        artistPrediction = ""
-        artistProbability = ""
-        styleTitle = ""
-        genreTitle = ""
-        artistTitle = ""
-        similarImages = []
+        style_prediction = ""
+        style_probability = ""
+        genre_prediction = ""
+        genre_probability = ""
+        artist_prediction = ""
+        artist_probability = ""
+        style_title = ""
+        genre_title = ""
+        artist_title = ""
+        similar_images = []
 
     if 'file' not in request.files:
         flash('No file part')
@@ -54,35 +54,35 @@ def uploadFile():
     file = request.files['file']
 
     if 'style2' in request.form:
-        styleTitle = "Style"
-        stylePrediction = predictStyleCategory(file)
-        styleProbability = predictStyleProb(file)
-        query = stylePrediction + 'paintings'
-        similarImages += getImages(query)
+        style_title = "Style"
+        style_prediction = predict_style_category(file)
+        style_probability = predict_style_prob(file)
+        query = style_prediction + 'paintings'
+        similar_images += get_images(query)
 
     if 'genre2' in request.form:
         genreTitle = "Genre"
-        genrePrediction = predictGenreCategory(file)
-        genreProbability = predictGenreProb(file)
+        genrePrediction = predict_genre_category(file)
+        genreProbability = predict_genre_prob(file)
         query = genrePrediction + 'paintings'
-        similarImages += getImages(query)
+        similar_images += get_images(query)
 
     if 'artist2' in request.form:
-        artistTitle = "Artist"
-        artistPrediction = predictArtistCategory(file)
-        artistProbability = predictArtistProb(file)
-        query = artistPrediction + 'paintings'
-        similarImages += getImages(query)
+        artist_title = "Artist"
+        artist_prediction = predict_artist_category(file)
+        artist_probability = predict_artist_prob(file)
+        query = artist_prediction + 'paintings'
+        similar_images += get_images(query)
 
     # Check that the user selected a file
     if file.filename == '':
         flash('No selected file')
         return redirect(request.url)
     # Actually upload a file and reload the page with the file displayed
-    if file and allowedFile(file.filename):
+    if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
-        uploadedImagePath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-        file.save(uploadedImagePath)
+        uploaded_image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        file.save(uploaded_image_path)
         return render_template("index.html", **locals())
     else:
         flash('Please select a file with a .png, .jpg, .jpeg, or .gif extension')
@@ -90,7 +90,7 @@ def uploadFile():
     return render_template("index.html",uploadedImagePath = os.path.join('static', "uploadPH.jpg"))
 
 ### Google API helper ###
-def getImages(query):
+def get_images(query):
     results = []
     req = requests.get('https://www.googleapis.com/customsearch/v1?key=AIzaSyB_cvfozOcU8r34KrvayV82thQqlAv74PA&cx=354adf1e91b6d54cb&searchType=image&num=3&q='+query).json()
     for img in req["items"]:
@@ -100,9 +100,9 @@ def getImages(query):
 
 ### STYLE ###
 # load the learner
-styleLearn = load_learner(path='./models', file='style_unfreeze_300.pkl')
-styleClasses = styleLearn.data.classes
-styleList = ['Abstract Expressionism', 'Action Painting', 'Analytical Cubism',
+style_learn = load_learner(path='./models', file='style_unfreeze_300.pkl')
+style_classes = style_learn.data.classes
+style_list = ['Abstract Expressionism', 'Action Painting', 'Analytical Cubism',
             'Art Nouveau', 'Baroque', 'Color Field Painting',
             'Contemporary Realism', 'Cubism', 'Early_Renaissance',
             'Expressionism', 'Fauvism', 'High Renaissance', 'Impressionism',
@@ -114,95 +114,92 @@ styleList = ['Abstract Expressionism', 'Action Painting', 'Analytical Cubism',
 # make prediction and load into json
 
 
-def predictStyleCategory(img_file):
+def predict_style_category(img_file):
     # function to take image and return prediction
-    prediction = styleLearn.predict(open_image(img_file))
-    probs_list = prediction[2].numpy()
-    predictionKey = styleClasses[prediction[1].item()]
-    return "Predicted Category: " + str(predictionKey)
+    prediction = style_learn.predict(open_image(img_file))
+    prediction_key = style_classes[prediction[1].item()]
+    return "Predicted Category: " + str(prediction_key)
 
 
-def predictStyleProb(img_file):
+def predict_style_prob(img_file):
     # function to take in image and return top 5 predictions
-    prediction = styleLearn.predict(open_image(img_file))
+    prediction = style_learn.predict(open_image(img_file))
     probs_list = prediction[2].numpy()
-    probabilityRaw = {c: round(float(probs_list[i]), 5) for (
-        i, c) in enumerate(styleClasses)}
+    probability_raw = {c: round(float(probs_list[i]), 5) for (
+        i, c) in enumerate(style_classes)}
 
-    probabilitySorted = sorted(
-        probabilityRaw.items(), key=lambda x: x[1], reverse=True)
+    probability_sorted = sorted(
+        probability_raw.items(), key=lambda x: x[1], reverse=True)
 
-    topFiveProb = str(probabilitySorted[:5])
-    specialChars = ['[', ']', "'"]
-    for i in specialChars:
-        topFiveProb = topFiveProb.replace(i, "")
+    top_five_prob = str(probability_sorted[:5])
+    special_chars = ['[', ']', "'"]
+    for i in special_chars:
+        top_five_prob = top_five_prob.replace(i, "")
 
-    return "Top 5 Probabilities: " + topFiveProb
+    return "Top 5 Probabilities: " + top_five_prob
 
 
 ### GENRE ###
 # load the learner
-genreLearn = load_learner(path='./models', file='genreLRChanged.pkl')
-genreClasses = genreLearn.data.classes
+genre_learn = load_learner(path='./models', file='genreLRChanged.pkl')
+genre_classes = genre_learn.data.classes
 
 # make prediction and load into json
 
 
-def predictGenreCategory(img_file):
+def predict_genre_category(img_file):
     # function to take image and return prediction
-    prediction = genreLearn.predict(open_image(img_file))
-    probs_list = prediction[2].numpy()
-    predictionKey = genreClasses[prediction[1].item()]
-    return "Predicted Category: " + str(predictionKey)
+    prediction = genre_learn.predict(open_image(img_file))
+    prediction_key = genre_classes[prediction[1].item()]
+    return "Predicted Category: " + str(prediction_key)
 
 
-def predictGenreProb(img_file):
+def predict_genre_prob(img_file):
     # function to take in image and return top 5 predictions
-    prediction = genreLearn.predict(open_image(img_file))
+    prediction = genre_learn.predict(open_image(img_file))
     probs_list = prediction[2].numpy()
-    probabilityRaw = {c: round(float(probs_list[i]), 5) for (
-        i, c) in enumerate(genreClasses)}
+    probability_raw = {c: round(float(probs_list[i]), 5) for (
+        i, c) in enumerate(genre_classes)}
 
-    probabilitySorted = sorted(
-        probabilityRaw.items(), key=lambda x: x[1], reverse=True)
+    probability_sorted = sorted(
+        probability_raw.items(), key=lambda x: x[1], reverse=True)
 
-    topFiveProb = str(probabilitySorted[:5])
+    top_five_prob = str(probability_sorted[:5])
     specialChars = ['[', ']', "'"]
     for i in specialChars:
-        topFiveProb = topFiveProb.replace(i, "")
+        top_five_prob = top_five_prob.replace(i, "")
 
-    return "Top 5 Probabilities: " + topFiveProb
+    return "Top 5 Probabilities: " + top_five_prob
 
 
 ### ARTIST ###
 # load the learner
-artistLearn = load_learner(path='./models', file='artistLR2.pkl')
-artistClasses = artistLearn.data.classes
+artist_learn = load_learner(path='./models', file='artistLR2.pkl')
+artist_classes = artist_learn.data.classes
 
 # make prediction and load into json
 
 
-def predictArtistCategory(img_file):
+def predict_artist_category(img_file):
     # function to take image and return prediction
-    prediction = artistLearn.predict(open_image(img_file))
-    probs_list = prediction[2].numpy()
-    predictionKey = artistClasses[prediction[1].item()]
-    return "Predicted Category: " + str(predictionKey)
+    prediction = artist_learn.predict(open_image(img_file))
+    prediction_key = artist_classes[prediction[1].item()]
+    return "Predicted Category: " + str(prediction_key)
 
 
-def predictArtistProb(img_file):
+def predict_artist_prob(img_file):
     # function to take in image and return top 5 predictions
-    prediction = artistLearn.predict(open_image(img_file))
+    prediction = artist_learn.predict(open_image(img_file))
     probs_list = prediction[2].numpy()
-    probabilityRaw = {c: round(float(probs_list[i]), 5) for (
-        i, c) in enumerate(artistClasses)}
+    probability_raw = {c: round(float(probs_list[i]), 5) for (
+        i, c) in enumerate(artist_classes)}
 
-    probabilitySorted = sorted(
-        probabilityRaw.items(), key=lambda x: x[1], reverse=True)
+    probability_sorted = sorted(
+        probability_raw.items(), key=lambda x: x[1], reverse=True)
 
-    topFiveProb = str(probabilitySorted[:5])
-    specialChars = ['[', ']', "'"]
-    for i in specialChars:
-        topFiveProb = topFiveProb.replace(i, "")
+    top_five_prob = str(probability_sorted[:5])
+    special_chars = ['[', ']', "'"]
+    for i in special_chars:
+        top_five_prob = top_five_prob.replace(i, "")
 
-    return "Top 5 Probabilities: " + topFiveProb
+    return "Top 5 Probabilities: " + top_five_prob
