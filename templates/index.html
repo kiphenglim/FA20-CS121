@@ -62,23 +62,29 @@
     <h2>Results</h2>
     <div style="margin: auto;" >
       <div class="floaty">
+        {% if styleTitle != "": %}
         <h3> {{ styleTitle }} </h3>
         <p><em> {{ stylePrediction }} </em></p>
         <p> {{ styleProbability }} </p>
+        {% endif %}
         <br>
       </div>
   
       <div class="floaty">
+        {% if genreTitle != "": %}
         <h3> {{ genreTitle }} </h3>
         <p><em> {{ genrePrediction }} </em></p>
         <p> {{ genreProbability }} </p>
+        {% endif %}
         <br>
       </div>
   
       <div class="floaty">
+        {% if artistTitle != "": %}
         <h3> {{ artistTitle }} </h3>
         <p><em> {{ artistPrediction }} </em></p>
         <p> {{ artistProbability }} </p>
+        {% endif %}
         <br>
       </div>
     </div>
@@ -86,7 +92,9 @@
   </div>
   <div class="panel" id="similar">
     <h2>Similar Paintings</h2>
-    
+    {% for img in similarImages: %}
+    <img class="similarIMG" src="{{ img }}">
+    {% endfor %}
   </div>
   <script src="{{ url_for('static', filename='js/scripts.js')}}"></script>
 </body>
