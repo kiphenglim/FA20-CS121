@@ -94,10 +94,8 @@ def upload_file():
             uploaded_image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(uploaded_image_path)
             return render_template("index.html", **locals())
-        else:
-            flash('Please select a file with a .png, .jpg, .jpeg, or .gif extension')
 
-    flash('Please select a file with a .png, .jpg, .jpeg, or .gif extension')
+        flash('Please select a file with a .png, .jpg, .jpeg, or .gif extension')
     return render_template("index.html",uploadedImagePath = os.path.join('static', "uploadPH.jpg"))
 
 ### Google API helper ###
