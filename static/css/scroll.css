@@ -21,7 +21,6 @@ header {
   font-size: 200%;
   position: fixed;
   width: 100%;
-  margin-top: 1em;
 }
 .panel {
   background-color: white;
@@ -32,6 +31,7 @@ header {
   float: left;
   font-size: 200%;
   border-radius: 15px;
+  padding-right: 1em;
 }
 .check-boxes {
   text-align: left;
@@ -41,16 +41,17 @@ header {
   margin: 0;
   padding: 20px;
   background-color:#9782D2; /* Black w/ opacity */
+  position: fixed;
 }
 
 #about {
-  margin-top: 10vw;
+  margin-top: 10em;
   width: 84vw;
   text-indent: 3vw;
 }
 
 #options {
-  width: 32vw;
+  width: 34vw;
   height: 78vh;
   margin-left: 8vw;
   margin-right: 2vw;
