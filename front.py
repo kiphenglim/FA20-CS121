@@ -1,3 +1,10 @@
+"""This file serves as the model for our entire art classifier
+website. It holds functionality for uploading/displaying images,
+making requests to several fast.ai image classification models, and
+defines routes for our index.html and instructions.html pages.
+
+"""
+
 import os
 from flask import Flask, flash, request, redirect, render_template
 from werkzeug.utils import secure_filename
@@ -21,12 +28,14 @@ app.debug = True
 
 
 def allowed_file(filename):
+    """ Given the name of a file, returns True if has an allowed image extension. """
     return '.' in filename and \
         filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 @app.route('/instructions', methods=['GET', 'POST'])
 def instructions():
+    """ Defines a route to the instructions page. """
     if request.method == 'POST':
         return render_template('index.html')
     return render_template('instructions.html')
@@ -34,6 +43,7 @@ def instructions():
 
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
+    """ Method for uploading and displaying an image back to the user. """
     if request.method == 'POST':
         # check if the post request has the file part
         style_prediction = ""
@@ -84,13 +94,13 @@ def upload_file():
         uploaded_image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(uploaded_image_path)
         return render_template("index.html", **locals())
-    else:
-        flash('Please select a file with a .png, .jpg, .jpeg, or .gif extension')
 
+    flash('Please select a file with a .png, .jpg, .jpeg, or .gif extension')
     return render_template("index.html",uploadedImagePath = os.path.join('static', "uploadPH.jpg"))
 
 ### Google API helper ###
 def get_images(query):
+    """ Google API helper. Given a string query, returns a Google image search for that query. """
     results = []
     req = requests.get('https://www.googleapis.com/customsearch/v1?'+
     'key=AIzaSyB_cvfozOcU8r34KrvayV82thQqlAv74PA&cx=354adf1e91b6d54cb&' +
