@@ -61,10 +61,10 @@ def upload_file():
         similar_images += get_images(query)
 
     if 'genre2' in request.form:
-        genreTitle = "Genre"
-        genrePrediction = predict_genre_category(file)
-        genreProbability = predict_genre_prob(file)
-        query = genrePrediction + 'paintings'
+        genre_title = "Genre"
+        genre_prediction = predict_genre_category(file)
+        genre_probability = predict_genre_prob(file)
+        query = genre_prediction + 'paintings'
         similar_images += get_images(query)
 
     if 'artist2' in request.form:
@@ -86,13 +86,15 @@ def upload_file():
         return render_template("index.html", **locals())
     else:
         flash('Please select a file with a .png, .jpg, .jpeg, or .gif extension')
-      
+
     return render_template("index.html",uploadedImagePath = os.path.join('static', "uploadPH.jpg"))
 
 ### Google API helper ###
 def get_images(query):
     results = []
-    req = requests.get('https://www.googleapis.com/customsearch/v1?key=AIzaSyB_cvfozOcU8r34KrvayV82thQqlAv74PA&cx=354adf1e91b6d54cb&searchType=image&num=3&q='+query).json()
+    req = requests.get('https://www.googleapis.com/customsearch/v1?'+
+    'key=AIzaSyB_cvfozOcU8r34KrvayV82thQqlAv74PA&cx=354adf1e91b6d54cb&' +
+    'searchType=image&num=3&q='+query).json()
     for img in req["items"]:
         results.append(img["link"])
 
@@ -165,8 +167,8 @@ def predict_genre_prob(img_file):
         probability_raw.items(), key=lambda x: x[1], reverse=True)
 
     top_five_prob = str(probability_sorted[:5])
-    specialChars = ['[', ']', "'"]
-    for i in specialChars:
+    special_chars = ['[', ']', "'"]
+    for i in special_chars:
         top_five_prob = top_five_prob.replace(i, "")
 
     return "Top 5 Probabilities: " + top_five_prob
