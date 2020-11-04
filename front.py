@@ -117,14 +117,14 @@ style_list = ['Abstract Expressionism', 'Action Painting', 'Analytical Cubism',
 
 
 def predict_style_category(img_file):
-    # function to take image and return prediction
+    """ Given an image file, returns the top style prediction. """
     prediction = style_learn.predict(open_image(img_file))
     prediction_key = style_classes[prediction[1].item()]
     return "Predicted Category: " + str(prediction_key)
 
 
 def predict_style_prob(img_file):
-    # function to take in image and return top 5 predictions
+    """ Given an image file, returns the top five style predictions. """
     prediction = style_learn.predict(open_image(img_file))
     probs_list = prediction[2].numpy()
     probability_raw = {c: round(float(probs_list[i]), 5) for (
@@ -150,14 +150,14 @@ genre_classes = genre_learn.data.classes
 
 
 def predict_genre_category(img_file):
-    # function to take image and return prediction
+    """ Given an image file, returns the top genre prediction. """
     prediction = genre_learn.predict(open_image(img_file))
     prediction_key = genre_classes[prediction[1].item()]
     return "Predicted Category: " + str(prediction_key)
 
 
 def predict_genre_prob(img_file):
-    # function to take in image and return top 5 predictions
+    """ Given an image file, returns the top five genre predictions. """
     prediction = genre_learn.predict(open_image(img_file))
     probs_list = prediction[2].numpy()
     probability_raw = {c: round(float(probs_list[i]), 5) for (
@@ -183,14 +183,14 @@ artist_classes = artist_learn.data.classes
 
 
 def predict_artist_category(img_file):
-    # function to take image and return prediction
+    """ Given an image, returns the top artist prediction. """
     prediction = artist_learn.predict(open_image(img_file))
     prediction_key = artist_classes[prediction[1].item()]
     return "Predicted Category: " + str(prediction_key)
 
 
 def predict_artist_prob(img_file):
-    # function to take in image and return top 5 predictions
+    """ Given an image, returns the top five artist predictions. """
     prediction = artist_learn.predict(open_image(img_file))
     probs_list = prediction[2].numpy()
     probability_raw = {c: round(float(probs_list[i]), 5) for (
