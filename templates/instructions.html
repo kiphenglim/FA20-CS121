@@ -2,14 +2,55 @@
 <title>Instructions</title>
 <head>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/scroll.css') }}">
+  <style>
+    .instructions {
+    max-width: 50%;
+    }
+  </style>
 </head>
 <body>
-  <!-- these are all just placeholders, feel free to delete and change -->
   <header>
     <h1>More About Our Site</h1>
   </header>
+  <div class="panel" id="about">
+    <h2>Instructions</h2>
+      <p> Here are step-by-step instructions for how to use our website!<p>
+      <h3>Step 1</h3>
+      <p>First, you choose which atributes you would like your image classified by. 
+         You can choose any combination of style, genre, and artist. You must choose at least one though!</p>
+      <img src="static/uploads/step1.png" class="instructions" alt="Choose Classification">
+      <h3>Step 2</h3>
+      </p>You can then choose which image you would like to classify. Click the Choose button to open the file explorer.</p>
+      <img src="static/uploads/step2.png" class="instructions" alt="Choose Photo">
+      <h3>Step 3</h3>
+      <p>Once the file explorer opens, choose which photo you want to classify. You can only choose a single image at a time.
+         You can only upload images of type png, jpg, jpeg, and gif. Any other type of file will cause an error and you will be asked to upload a different file.</p>
+      <img src="static/uploads/step3.png" class="instructions" alt="File Explorer">
+      <h3>Step 4</h3>
+      <p>Now that you have choosen an image, you can run the model by clicking on the Run button! Our website will then classify the image by the catagories that you choose,
+           in this case Artist.</p>
+      <img src="static/uploads/step4.png" class="instructions" alt="Run Button">
+      <h3>Step 5</h3>
+      <p>Our website will then automatically scroll to the results at the bottom of the page. There will be results for each classiciation type that you choose, with classifications ranked in order of likelyhood.
+         That is, in the example below our classifier believes that there is a 83% chance that the artist is Vincent van Gogh. We also provide images that are similar to the top classification identified by our model.
+         We hope that you will discover new art that is similar to the one that you wanted to learn more about with our website!</p>
+      <img src="static/uploads/step5.png" class="instructions" alt="Results">
+  </div>
   <div class="panel">
-    <h2>Check out our github repository <a href="https://github.com/kiphenglim/FA20-CS121">here</a></h2>
+    <h2>More Classification Information</h2>
+    <p>We trained our models on art from the WikiArt dataset on the ArtGAN Github, which can be found <a href="https://github.com/cs-chan/ArtGAN/tree/master/WikiArt%20Dataset">here</a>.
+       This dataset has 27 different styles, 10 genres, and 23 artists. We have a limited number of classifications within each class due to needing a large number of photos for each
+       classification in order to train a successful model.</p>
+    <p>Here is a complete list of the all of the styles, genres, and artists that our models are capable of classifying.</p>
+    <p><b>Styles: </b> 
+        Abstract Expressionism, Action Painting, Analytical Cubism, Art Nouveau, Baroque, Color Field Painting, Contemporary Realism, Cubism, Early Renaissance, Expressionism,
+        Fauvism, High Renaissance, Impressionism, Mannerism Late Renaissance, Minimalism, Naive Art Primitivism, New Realism, Northern Renaissance, Pointillism, Pop Art, Post Impressionism,
+        Realism, Rococo, Romanticism, Symbolism, Synthetic Cubism, and Ukiyo-e.</p>
+    <p><b>Genres: </b> Abstract, Cityscape, Genre Art, Illustration, Landscape, Nude Painting, Portrait, Religious painting, Sketch and Study, and Still Life.</p> 
+    <p><b>Artists: </b>
+        Albrecht Durer, Boris Kustodiev, Camille Pissarro, Childe Hassam, Claude Monet, Edgar Degas, Eugene Boudin, Gustave Dore, Ilya Repin, Ivan Aivazovsky, Ivan Shishkin,
+        John Singer Sargent, Marc Chagall, Martiros Saryan, Nicholas Roerich, Pablo Picasso, Pablo Cezanne, Pierre Auguste Penoir, Pyotr Konchalovsky, Raphael Kirchner, Rembrandt, Salvador Dali, and Vincent van Gogh.</p>
+      <p>If you want even more information on the how this website is setup, check out our Github repository <a href="https://github.com/kiphenglim/FA20-CS121">here</a></p>
   </div>
   <form method="post">
     <button type="submit">Back to Main Page</button>
