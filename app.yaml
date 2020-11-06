@@ -1,0 +1,16 @@
+runtime: python38
+
+entrypoint: gunicorn front:app
+
+instance_class: F4
+
+handlers:
+- url: /
+  script: auto
+
+- url: /.*
+  script: auto
+
+- url: /(.*\.(gif|png|jpg|gif))$
+  static_files: static/uploads/\1
+  upload: static/uploads.*\.(gif|png|jpg|gif)$
