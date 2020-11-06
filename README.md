@@ -12,7 +12,7 @@ Once the models have classified the painting, the app displays the results and t
 [click here](https://arctic-anvil-294604.wn.r.appspot.com/instructions) for detailed instructions on how to use the site.
 
 ## Hosting
-Image Classifier is currently hosted on the [google cloud platform](https://console.cloud.google.com/appengine/start)
+Image Classifier is currently hosted on the [google cloud platform](https://console.cloud.google.com/appengine/start).
 
 ## Contributors
 [Ki Pheng Lim](https://github.com/kiphenglim)
