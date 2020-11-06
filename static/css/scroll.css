@@ -27,7 +27,6 @@ header {
   text-align: center;
   margin-left: 8vw;
   margin-top: 8vh;
-  margin-right: 8vw;
   float: left;
   font-size: 200%;
   border-radius: 15px;
@@ -52,7 +51,6 @@ header {
 
 #options {
   width: 32vw;
-  height: 78vh;
   margin-left: 8vw;
   margin-right: 2vw;
 }
@@ -65,8 +63,6 @@ header {
 
 #upload {
   width: 44vw;
-  height: 78vh;
-  margin-right: 8vw;
   margin-left: 2vw;
 }
 #results {
