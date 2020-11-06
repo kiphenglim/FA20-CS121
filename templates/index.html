@@ -64,28 +64,28 @@
     <h2>Results</h2>
     <div style="margin: auto;" >
       <div class="floaty">
-        {% if styleTitle != "": %}
-        <h3> {{ styleTitle }} </h3>
-        <p><em> {{ stylePrediction }} </em></p>
-        <p> {{ styleProbability }} </p>
+        {% if style_title != "": %}
+        <h3> {{ style_title }} </h3>
+        <p><em> {{ style_prediction }} </em></p>
+        <p> {{ style_probability }} </p>
         {% endif %}
         <br>
       </div>
   
       <div class="floaty">
-        {% if genreTitle != "": %}
-        <h3> {{ genreTitle }} </h3>
-        <p><em> {{ genrePrediction }} </em></p>
-        <p> {{ genreProbability }} </p>
+        {% if genre_title != "": %}
+        <h3> {{ genre_title }} </h3>
+        <p><em> {{ genre_prediction }} </em></p>
+        <p> {{ genre_probability }} </p>
         {% endif %}
         <br>
       </div>
   
       <div class="floaty">
-        {% if artistTitle != "": %}
-        <h3> {{ artistTitle }} </h3>
-        <p><em> {{ artistPrediction }} </em></p>
-        <p> {{ artistProbability }} </p>
+        {% if artist_title != "": %}
+        <h3> {{ artist_title }} </h3>
+        <p><em> {{ artist_prediction }} </em></p>
+        <p> {{ artist_probability }} </p>
         {% endif %}
         <br>
       </div>
@@ -94,7 +94,7 @@
   </div>
   <div class="panel" id="similar">
     <h2>Similar Paintings</h2>
-    {% for img in similarImages: %}
+    {% for img in similar_images: %}
     <img class="similarIMG" src="{{ img }}">
     {% endfor %}
   </div>
