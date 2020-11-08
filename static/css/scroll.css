@@ -30,7 +30,6 @@ header {
   float: left;
   font-size: 200%;
   border-radius: 15px;
-  padding-right: 1em;
 }
 .check-boxes {
   text-align: left;
@@ -50,7 +49,7 @@ header {
 }
 
 #options {
-  width: 32vw;
+  width: 34vw;
   margin-left: 8vw;
   margin-right: 2vw;
 }
@@ -62,7 +61,7 @@ header {
 }
 
 #upload {
-  width: 44vw;
+  width: 46vw;
   margin-left: 2vw;
 }
 #results {

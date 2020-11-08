@@ -68,21 +68,21 @@ def upload_file():
             style_title = "Style"
             style_prediction = predict_style_category(file)
             style_probability = predict_style_prob(file)
-            query = style_prediction + 'paintings'
+            query = style_prediction.split(' ')[2] + ' paintings'
             similar_images += get_images(query)
 
         if 'genre2' in request.form:
             genre_title = "Genre"
             genre_prediction = predict_genre_category(file)
             genre_probability = predict_genre_prob(file)
-            query = genre_prediction + 'paintings'
+            query = genre_prediction.split(' ')[2] + ' paintings'
             similar_images += get_images(query)
 
         if 'artist2' in request.form:
             artist_title = "Artist"
             artist_prediction = predict_artist_category(file)
             artist_probability = predict_artist_prob(file)
-            query = artist_prediction + 'paintings'
+            query = artist_prediction.split(' ')[2] + ' paintings'
             similar_images += get_images(query)
 
         # Check that the user selected a file
@@ -97,7 +97,7 @@ def upload_file():
             return render_template("index.html", **locals())
 
         flash('Please select a file with a .png, .jpg, .jpeg, or .gif extension')
-    return render_template("index.html",uploadedImagePath = os.path.join('static', "uploadPH.jpg"))
+    return render_template("index.html", uploadedImagePath = os.path.join('static', "uploadPH.jpg"))
 
 
 def correct_round(arr, num):
@@ -115,8 +115,10 @@ def get_images(query):
     req = requests.get('https://www.googleapis.com/customsearch/v1?'+
     'key=AIzaSyB_cvfozOcU8r34KrvayV82thQqlAv74PA&cx=354adf1e91b6d54cb&' +
     'searchType=image&num=3&q='+query).json()
-    for img in req["items"]:
-        results.append(img["link"])
+    
+    if(req["searchInformation"]["totalResults"] != "0"):
+        for img in req["items"]:
+            results.append(img["link"])
 
     return results
 
@@ -145,12 +147,12 @@ def predict_style_prob(img_file):
     """ Given an image file, returns the top five style predictions. """
     prediction = style_learn.predict(open_image(img_file))
     probs_list = prediction[2].numpy()
-    prob_sorted = sorted(prob_list, key=lambda x: float(x), reverse=True)
+    prob_sorted = sorted(probs_list, key=lambda x: float(x), reverse=True)
     prob_rounded = correct_round(prob_sorted, 2)
     percent_dict = {c: str(100*prob_rounded[i]) + "%" for (i, c) in enumerate(style_classes)}
     percent_list = [str(i).replace(',',':') for i in list(percent_dict.items())]
 
-    top_five = str(percentList[:5])
+    top_five = str(percent_list[:5])
     special_chars = ['[', ']', "'", '"']
     for i in special_chars:
       top_five = top_five.replace(i, "")
@@ -210,7 +212,7 @@ def predict_artist_prob(img_file):
     percent_dict = {c: str(100*prob_rounded[i]) + "%" for (i, c) in enumerate(artist_classes)}
     percent_list = [str(i).replace(',',':') for i in list(percent_dict.items())]
 
-    top_five = str(percentList[:5])
+    top_five = str(percent_list[:5])
     special_chars = ['[', ']', "'", '"']
     for i in special_chars:
       top_five = top_five.replace(i, "")
