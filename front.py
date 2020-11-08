@@ -95,7 +95,7 @@ def upload_file():
             return render_template("index.html", **locals())
 
         flash('Please select a file with a .png, .jpg, .jpeg, or .gif extension')
-    return render_template("index.html", uploadedImagePath = os.path.join('static', "uploadPH.jpg"))
+    return render_template("index.html",uploadedImagePath = os.path.join('static', "uploadPH.jpg"))
 
 ### Google API helper ###
 def get_images(query):
