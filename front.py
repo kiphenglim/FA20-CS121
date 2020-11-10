@@ -113,7 +113,7 @@ def get_images(query):
     """ Google API helper. Given a string query, returns a Google image search for that query. """
     results = []
     req = requests.get('https://www.googleapis.com/customsearch/v1?'+
-    'key=AIzaSyB_cvfozOcU8r34KrvayV82thQqlAv74PA&cx=3d5f9af0e76edf271&' +
+    'key=AIzaSyBK3UmzZsrEyB8ouyWYquRJjdq6CIOec-A&cx=23cebd78935069e14&' +
     'searchType=image&num=3&q='+query).json()
     
     if(req["searchInformation"]["totalResults"] != "0"):
