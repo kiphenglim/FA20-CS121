@@ -14,7 +14,7 @@ from make_predictions import predict_artist_category, predict_artist_prob, \
 predict_genre_category, predict_genre_prob, predict_style_category, \
 predict_style_prob
 
-UPLOAD_FOLDER = os.path.join('static', 'uploads')
+UPLOAD_FOLDER = os.path('tmp')
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 IMAGE_PATH = ""
 
