@@ -98,6 +98,7 @@ header {
   height: auto;
   max-width: 40vw;
   max-height: 40vh;
+  margin: 3vw;
 }
 .invisible {
   width:0;
