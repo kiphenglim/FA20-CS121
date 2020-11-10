@@ -38,7 +38,7 @@ def predict_style_prob(img_file):
     prediction = style_learn.predict(open_image(img_file))
     probs_list = prediction[2].numpy()
     # format and round results
-    prob_sorted = sorted(probs_list, key=lambda x: float(x), reverse=True)
+    prob_sorted = sorted(probs_list, key=float, reverse=True)
     prob_rounded = correct_round(prob_sorted, 2)
     percent_dict = {
         c: str(100*prob_rounded[i]) + "%" for (i, c) in enumerate(style_classes)}
@@ -71,7 +71,7 @@ def predict_genre_prob(img_file):
     percent confidence. """
     prediction = genre_learn.predict(open_image(img_file))
     probs_list = prediction[2].numpy()
-    prob_sorted = sorted(probs_list, key=lambda x: float(x), reverse=True)
+    prob_sorted = sorted(probs_list, key=float, reverse=True)
     # format and round results
     prob_rounded = correct_round(prob_sorted, 2)
     percent_dict = {
@@ -105,7 +105,7 @@ def predict_artist_prob(img_file):
     """ Given an image, returns the top five artist predictions and their percent confidence. """
     prediction = artist_learn.predict(open_image(img_file))
     probs_list = prediction[2].numpy()
-    prob_sorted = sorted(probs_list, key=lambda x: float(x), reverse=True)
+    prob_sorted = sorted(probs_list, key=float, reverse=True)
     # format and round results
     prob_rounded = correct_round(prob_sorted, 2)
     percent_dict = {
