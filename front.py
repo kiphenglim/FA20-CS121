@@ -94,8 +94,8 @@ def upload_file():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             uploaded_image_path = os.path.join('/tmp', filename)
-            # if not os.path.exists('/tmp'):
-            #     os.mkdir(os.path.join('/tmp'))
+            if not os.path.exists('/tmp'):
+                os.mkdir(os.path.join('/tmp'))
             file.save(uploaded_image_path)
             return render_template("index.html", **locals())
 
