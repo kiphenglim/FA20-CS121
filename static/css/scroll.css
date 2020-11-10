@@ -48,6 +48,11 @@ header {
   text-indent: 3vw;
 }
 
+#classification {
+  width: 84vw;
+  margin-bottom: 8vh;
+}
+
 #options {
   width: 34vw;
   margin-left: 8vw;
