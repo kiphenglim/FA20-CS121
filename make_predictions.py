@@ -33,7 +33,7 @@ def predict_style_category(img_file):
 
 
 def predict_style_prob(img_file):
-    """ Given an image file, returns the top five style predictions and their 
+    """ Given an image file, returns the top five style predictions and their
     percent confidence.. """
     prediction = style_learn.predict(open_image(img_file))
     probs_list = prediction[2].numpy()
@@ -67,7 +67,7 @@ def predict_genre_category(img_file):
 
 
 def predict_genre_prob(img_file):
-    """ Given an image file, returns the top five genre predictions and their 
+    """ Given an image file, returns the top five genre predictions and their
     percent confidence. """
     prediction = genre_learn.predict(open_image(img_file))
     probs_list = prediction[2].numpy()
