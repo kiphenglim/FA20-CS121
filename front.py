@@ -10,7 +10,9 @@ from flask import Flask, flash, request, redirect, render_template
 from werkzeug.utils import secure_filename
 from flask_cors import CORS
 import requests
-from makePredictions import *
+from make_predictions import predict_artist_category, predict_artist_prob, \
+predict_genre_category, predict_genre_prob, predict_style_category, \
+predict_style_prob
 
 UPLOAD_FOLDER = os.path.join('static', 'uploads')
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
@@ -104,8 +106,8 @@ def get_images(query):
     req = requests.get('https://www.googleapis.com/customsearch/v1?'+
     'key=AIzaSyBK3UmzZsrEyB8ouyWYquRJjdq6CIOec-A&cx=23cebd78935069e14&' +
     'searchType=image&num=3&q='+query).json()
-    
-    if(req["searchInformation"]["totalResults"] != "0"):
+
+    if req["searchInformation"]["totalResults"] != "0":
         for img in req["items"]:
             results.append(img["link"])
 
