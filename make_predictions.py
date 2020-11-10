@@ -8,17 +8,15 @@ import decimal
 from fastai.basic_train import load_learner
 from fastai.vision import open_image
 
-# Helper function used in all probability functions for correct rounding
-# Faced errors when rounidng floats, this keeps precision and handles those cases
-
 
 def correct_round(arr, num):
-    newList = []
+    """ Helper function used in all probability functions """
+    new_list = []
     for value in arr:
-        d = decimal.Decimal(str(value))
+        dec_form = decimal.Decimal(str(value))
         decimal.getcontext().prec = num
-        newList.append(d*1)
-    return newList
+        new_list.append(dec_form*1)
+    return new_list
 
 
 ###STYLE###
@@ -35,7 +33,8 @@ def predict_style_category(img_file):
 
 
 def predict_style_prob(img_file):
-    """ Given an image file, returns the top five style predictions and their percent confidence.. """
+    """ Given an image file, returns the top five style predictions and their 
+    percent confidence.. """
     prediction = style_learn.predict(open_image(img_file))
     probs_list = prediction[2].numpy()
     # format and round results
@@ -68,7 +67,8 @@ def predict_genre_category(img_file):
 
 
 def predict_genre_prob(img_file):
-    """ Given an image file, returns the top five genre predictions and their percent confidence. """
+    """ Given an image file, returns the top five genre predictions and their 
+    percent confidence. """
     prediction = genre_learn.predict(open_image(img_file))
     probs_list = prediction[2].numpy()
     prob_sorted = sorted(probs_list, key=lambda x: float(x), reverse=True)
