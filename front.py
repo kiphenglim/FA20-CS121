@@ -43,6 +43,7 @@ def instructions():
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
     """ Method for uploading and displaying an image back to the user. """
+    uploaded_image_path = os.path.join('static', "uploadPH.jpg")
     if request.method == 'POST':
         # check if the post request has the file part
         style_prediction = ""
@@ -95,7 +96,7 @@ def upload_file():
             return render_template("index.html", **locals())
 
         flash('Please select a file with a .png, .jpg, .jpeg, or .gif extension')
-    return render_template("index.html",uploadedImagePath = os.path.join('static', "uploadPH.jpg"))
+    return render_template("index.html", **locals())
 
 ### Google API helper ###
 def get_images(query):
