@@ -45,7 +45,7 @@ def instructions():
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
     """ Method for uploading and displaying an image back to the user. """
-    uploaded_image_path = os.path.join('static', "uploadPH.jpg")
+    uploaded_image_path = os.path.join('/tmp', "uploadPH.jpg")
     if request.method == 'POST':
         # check if the post request has the file part
         style_prediction = ""
