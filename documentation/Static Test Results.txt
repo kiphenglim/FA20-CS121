@@ -1,0 +1,72 @@
+﻿Before Code Formatting
+First linting
+klim@quasar [~/FA20-CS121] % pylint front.py
+front.py:20:0: W0311: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+# Lines omitted for brevity.
+front.py:57:0: W0311: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+front.py:58:0: C0303: Trailing whitespace (trailing-whitespace)
+front.py:59:0: W0311: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+# Lines omitted for brevity.
+front.py:63:0: W0311: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+front.py:64:0: C0303: Trailing whitespace (trailing-whitespace)
+front.py:65:0: W0311: Bad indentation. Found 4 spaces, expected 8 (bad-indentation)
+# Lines omitted for brevity.
+front.py:79:0: W0311: Bad indentation. Found 6 spaces, expected 12 (bad-indentation)
+# Lines omitted for brevity.
+front.py:171:0: W0311: Bad indentation. Found 2 spaces, expected 4 (bad-indentation)
+front.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+front.py:6:0: E0401: Unable to import 'flask_cors' (import-error)
+front.py:19:0: C0103: Function name "allowedFile" doesn't conform to snake_case naming style (invalid-name)
+front.py:19:0: C0116: Missing function or method docstring (missing-function-docstring)
+front.py:24:0: C0116: Missing function or method docstring (missing-function-docstring)
+front.py:30:0: C0103: Function name "uploadFile" doesn't conform to snake_case naming style (invalid-name)
+front.py:30:0: C0116: Missing function or method docstring (missing-function-docstring)
+front.py:37:4: C0103: Variable name "predictStyle" doesn't conform to snake_case naming style (invalid-name)
+# Lines omitted for brevity.
+front.py:69:6: C0103: Variable name "probArtist" doesn't conform to snake_case naming style (invalid-name)
+front.py:76:4: R1705: Unnecessary "else" after "return" (no-else-return)
+front.py:78:6: C0103: Variable name "fullPath" doesn't conform to snake_case naming style (invalid-name)
+front.py:34:4: W0612: Unused variable 'style' (unused-variable)
+front.py:35:4: W0612: Unused variable 'genre' (unused-variable)
+front.py:36:4: W0612: Unused variable 'artist' (unused-variable)
+front.py:94:0: C0103: Function name "predictStyleCategory" doesn't conform to snake_case naming # Lines omitted for brevity.
+front.py:2:0: W0611: Unused jsonify imported from flask (unused-import)
+front.py:2:0: W0611: Unused url_for imported from flask (unused-import)
+front.py:6:0: W0611: Unused cross_origin imported from flask_cors (unused-import)
+
+
+--------------------------------------------------------------------
+Your code has been rated at -3.79/10 (previous run: -3.79/10, +0.00)
+
+
+Problems
+* Expects tab size 4 instead of tab size 2
+* Some overly long lines
+* Expects snake case rather than camel case
+* Unused variables
+* Unused imports
+After Code Linting
+front.py
+klim@quasar [~/FA20-CS121] % pylint front.py
+************* Module front
+front.py:51:8: W0641: Possibly unused variable 'style_probability' (possibly-unused-variable)
+front.py:53:8: W0641: Possibly unused variable 'genre_probability' (possibly-unused-variable)
+front.py:55:8: W0641: Possibly unused variable 'artist_probability' (possibly-unused-variable)
+front.py:56:8: W0641: Possibly unused variable 'style_title' (possibly-unused-variable)
+front.py:57:8: W0641: Possibly unused variable 'genre_title' (possibly-unused-variable)
+front.py:58:8: W0641: Possibly unused variable 'artist_title' (possibly-unused-variable)
+
+
+------------------------------------------------------------------
+Your code has been rated at 9.15/10 (previous run: 9.15/10, +0.00)
+
+
+Note: Python interpreted these variables as possibly unused, but these variables are gathered using **locals()
+
+
+make_predictions.py
+klim@quasar [~/FA20-CS121] % pylint make_predictions.py
+
+
+--------------------------------------------------------------------
+Your code has been rated at 10.00/10 (previous run: 10.00/10, +0.00)
