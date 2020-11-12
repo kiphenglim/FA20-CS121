@@ -55,7 +55,7 @@
       <input type="checkbox" class="invisible" id="genre2" name="genre2" value="genre">
       <input type="checkbox" class="invisible" id="artist2" name="artist2" value="artist">
       <input type="file" id="file" name="file">
-      <input  class="button" type=submit value="Upload and Run" >
+      <input  class="button" type=submit value="Upload and Run">
     </form>
     <img src="{{ uploaded_image_path }}" id=uploaded_image alt="Uploaded Image" height="60%">
   </div>
@@ -89,6 +89,7 @@
         {% endif %}
         <br>
       </div>
+      <button class="button" style="margin-bottom: 4vh;" onclick="refresh()">Clear Results</button>
     </div>
     
   </div>
@@ -97,6 +98,11 @@
     {% for img in similar_images: %}
     <img class="similarIMG" src="{{ img }}">
     {% endfor %}
+    {% if scroll: %}
+    <script>
+      document.getElementById('{{ scroll }}').scrollIntoView();
+    </script>
+    {% endif %}
   </div>
   <script src="{{ url_for('static', filename='js/scripts.js')}}"></script>
 </body>
