@@ -95,7 +95,7 @@ def upload_file():
             filename = secure_filename(file.filename)
             uploaded_image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(uploaded_image_path)
-            return render_template("index.html", **locals())
+            return render_template("index.html", **locals(), scroll="results")
 
         flash('Please select a file with a .png, .jpg, .jpeg, or .gif extension')
     return render_template("index.html", **locals())

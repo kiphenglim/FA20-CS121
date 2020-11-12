@@ -19,7 +19,6 @@ header {
   text-align: center;
   padding:1vw;
   font-size: 200%;
-  position: fixed;
   width: 100%;
 }
 .panel {
@@ -43,7 +42,7 @@ header {
 }
 
 #about {
-  margin-top: 10em;
+  margin-top: 2em;
   width: 84vw;
   text-indent: 3vw;
 }
