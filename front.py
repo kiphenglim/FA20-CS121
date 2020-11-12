@@ -95,7 +95,7 @@ def upload_file():
             filename = secure_filename(file.filename)
             uploaded_image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(uploaded_image_path)
-            return render_template("index.html", **locals(), scroll="results")
+            return render_template("index.html", scroll="results", **locals())
 
         flash('Please select a file with a .png, .jpg, .jpeg, or .gif extension')
     return render_template("index.html", **locals())
@@ -105,10 +105,10 @@ def get_images(query):
     """ Google API helper. Given a string query, returns a Google image search for that query. """
     results = []
     req = requests.get('https://www.googleapis.com/customsearch/v1?'+
-    'key=AIzaSyBK3UmzZsrEyB8ouyWYquRJjdq6CIOec-A&cx=23cebd78935069e14&' +
+    'key=AIzaSyBkaAUHQ17XI3g8mFackoWE9ORqQvGw1B4&cx=23cebd78935069e14&' +
     'searchType=image&num=3&q='+query).json()
 
-    if req["searchInformation"]["totalResults"] != "0":
+    if 'searchInformation' in req and req["searchInformation"]["totalResults"] != "0":
         for img in req["items"]:
             results.append(img["link"])
 

@@ -3,6 +3,6 @@ function updateBoxes(boxId, box2Id) {
 }
 
 function refresh() {
-    location.reload();
+    //location.reload();
     document.getElementById("options").scrollIntoView();
 }
