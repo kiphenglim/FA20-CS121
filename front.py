@@ -71,9 +71,19 @@ def upload_file():
         file = request.files['file']
 
         # Check that the user selected a file
+        flag = False
         if file.filename == '':
             flash('No selected file')
+            flag=True
+        
+        # Check if the user selected any options
+        if 'style2' not in request.form and 'genre2' not in request.form and 'artist2' not in request.form:
+            flash('No options selected')
+            flag=True
+
+        if flag:
             return redirect(request.url)
+
 
         # Actually upload a file and reload the page with the file displayed
         if file and valid_image_extension(file.filename):
