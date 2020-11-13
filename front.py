@@ -5,16 +5,16 @@ defines routes for our index.html and instructions.html pages.
 
 """
 
-import os
 from flask import Flask, flash, request, redirect, render_template
-from werkzeug.utils import secure_filename
 from flask_cors import CORS
 import imghdr
-import requests
 from make_predictions import predict_artist_category, predict_artist_prob, \
 predict_genre_category, predict_genre_prob, predict_style_category, \
 predict_style_prob
+import os
 from PIL import Image
+import requests
+from werkzeug.utils import secure_filename
 
 UPLOAD_FOLDER = os.path.join('static', 'uploads')
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
@@ -26,8 +26,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 app.debug = True
-# Check if the file is an image
-# We might have to change this to only 1 type of extension for alpha
+
 
 def valid_image_extension(filename):
     """ Given the name of a file, returns True if has an allowed image extension. """
