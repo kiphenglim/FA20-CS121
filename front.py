@@ -13,6 +13,7 @@ import requests
 from make_predictions import predict_artist_category, predict_artist_prob, \
 predict_genre_category, predict_genre_prob, predict_style_category, \
 predict_style_prob
+from PIL import Image
 
 UPLOAD_FOLDER = os.path.join('static', 'uploads')
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
@@ -27,11 +28,30 @@ app.debug = True
 # Check if the file is an image
 # We might have to change this to only 1 type of extension for alpha
 
+def valid_image(filename):
+    """ Checks an image's extension and contents. Returns true if the file has
+    the correct extension and contents. """
+    return valid_image_extension(filename) and validate_image_contents(filename)
 
-def allowed_file(filename):
+
+def valid_image_extension(filename):
     """ Given the name of a file, returns True if has an allowed image extension. """
     return '.' in filename and \
         filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+def validate_image_contents(filename):
+    """ Given the name of a file, returns True if the contents are valid. """
+    try:
+        im = Image.open(filename)
+        im.verify()
+    except: return False
+
+    try: im.verify()
+    except: return False
+    
+    im.close()
+    return True
 
 
 @app.route('/instructions', methods=['GET', 'POST'])
@@ -91,7 +111,7 @@ def upload_file():
             flash('No selected file')
             return redirect(request.url)
         # Actually upload a file and reload the page with the file displayed
-        if file and allowed_file(file.filename):
+        if file and valid_image(file.filename):
             filename = secure_filename(file.filename)
             uploaded_image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(uploaded_image_path)
