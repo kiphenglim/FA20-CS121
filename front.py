@@ -9,6 +9,7 @@ import os
 from flask import Flask, flash, request, redirect, render_template
 from werkzeug.utils import secure_filename
 from flask_cors import CORS
+import imghdr
 import requests
 from make_predictions import predict_artist_category, predict_artist_prob, \
 predict_genre_category, predict_genre_prob, predict_style_category, \
@@ -16,7 +17,7 @@ predict_style_prob
 from PIL import Image
 
 UPLOAD_FOLDER = os.path.join('static', 'uploads')
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 IMAGE_PATH = ""
 
 app = Flask(__name__)
@@ -28,30 +29,15 @@ app.debug = True
 # Check if the file is an image
 # We might have to change this to only 1 type of extension for alpha
 
-def valid_image(filename):
-    """ Checks an image's extension and contents. Returns true if the file has
-    the correct extension and contents. """
-    return valid_image_extension(filename) and validate_image_contents(filename)
-
-
 def valid_image_extension(filename):
     """ Given the name of a file, returns True if has an allowed image extension. """
     return '.' in filename and \
         filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-def validate_image_contents(filename):
+def valid_image_contents(filename):
     """ Given the name of a file, returns True if the contents are valid. """
-    try:
-        im = Image.open(filename)
-        im.verify()
-    except: return False
-
-    try: im.verify()
-    except: return False
-    
-    im.close()
-    return True
+    return imghdr.what(filename) in ALLOWED_EXTENSIONS
 
 
 @app.route('/instructions', methods=['GET', 'POST'])
@@ -85,40 +71,46 @@ def upload_file():
 
         file = request.files['file']
 
-        if 'style2' in request.form:
-            style_title = "Style"
-            style_prediction = predict_style_category(file)
-            style_probability = predict_style_prob(file)
-            query = style_prediction.split(' ')[2] + ' paintings'
-            similar_images += get_images(query)
-
-        if 'genre2' in request.form:
-            genre_title = "Genre"
-            genre_prediction = predict_genre_category(file)
-            genre_probability = predict_genre_prob(file)
-            query = genre_prediction.split(' ')[2] + ' paintings'
-            similar_images += get_images(query)
-
-        if 'artist2' in request.form:
-            artist_title = "Artist"
-            artist_prediction = predict_artist_category(file)
-            artist_probability = predict_artist_prob(file)
-            query = artist_prediction.split(' ')[2] + ' paintings'
-            similar_images += get_images(query)
-
         # Check that the user selected a file
         if file.filename == '':
             flash('No selected file')
             return redirect(request.url)
+
         # Actually upload a file and reload the page with the file displayed
-        if file and valid_image(file.filename):
+        if file and valid_image_extension(file.filename):
             filename = secure_filename(file.filename)
             uploaded_image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(uploaded_image_path)
-            return render_template("index.html", scroll="results", **locals())
 
-        flash('Please select a file with a .png, .jpg, .jpeg, or .gif extension')
+            if valid_image_contents(uploaded_image_path):
+                if 'style2' in request.form:
+                    style_title = "Style"
+                    style_prediction = predict_style_category(file)
+                    style_probability = predict_style_prob(file)
+                    query = style_prediction.split(' ')[2] + ' paintings'
+                    similar_images += get_images(query)
+
+                if 'genre2' in request.form:
+                    genre_title = "Genre"
+                    genre_prediction = predict_genre_category(file)
+                    genre_probability = predict_genre_prob(file)
+                    query = genre_prediction.split(' ')[2] + ' paintings'
+                    similar_images += get_images(query)
+
+                if 'artist2' in request.form:
+                    artist_title = "Artist"
+                    artist_prediction = predict_artist_category(file)
+                    artist_probability = predict_artist_prob(file)
+                    query = artist_prediction.split(' ')[2] + ' paintings'
+                    similar_images += get_images(query)
+
+                return render_template("index.html", scroll="results", **locals())
+            else:
+                flash('Please check that your file has not been corrupted.')
+        else:
+            flash('Please select a file with a .png, .jpg, or .jpeg extension')
     return render_template("index.html", **locals())
+
 
 ### Google API helper ###
 def get_images(query):
