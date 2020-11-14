@@ -41,8 +41,7 @@ header {
 .popup {
   margin: 0;
   padding: 20px;
-  background-color:#9782D2; /* Black w/ opacity */
-  position: fixed;
+  background-color:#9782D2; 
 }
 
 #about {
@@ -60,7 +59,7 @@ header {
   width: 34vw;
   margin-left: 8vw;
   margin-right: 2vw;
-  height: 92vh;
+  min-height: 92vh;
 }
 
 .description {
@@ -86,7 +85,7 @@ header {
   margin-bottom: 8vh;
 }
 .button {
-  background-color: #6794AA; /* Green */
+  background-color: #6794AA; 
   border: none;
   color: white;
   padding: 15px 32px;
