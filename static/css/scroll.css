@@ -20,7 +20,8 @@ header {
   background-color: #6794AA;  
   color: white;  
   text-align: center;
-  padding:1vw;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
   font-size: 200%;
   width: 100%;
 }
@@ -59,6 +60,7 @@ header {
   width: 34vw;
   margin-left: 8vw;
   margin-right: 2vw;
+  height: 92vh;
 }
 
 .description {
@@ -70,6 +72,7 @@ header {
 #upload {
   width: 46vw;
   margin-left: 2vw;
+  height: 92vh;
 }
 #results {
   width: 84vw;
