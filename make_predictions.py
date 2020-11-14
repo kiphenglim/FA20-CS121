@@ -9,14 +9,11 @@ from fastai.basic_train import load_learner
 from fastai.vision import open_image
 
 
-def correct_round(arr, num):
+def correct_round(val, num):
     """ Helper function used in all probability functions """
-    new_list = []
-    for value in arr:
-        dec_form = decimal.Decimal(str(value))
-        decimal.getcontext().prec = num
-        new_list.append(dec_form*1)
-    return new_list
+    dec_form = decimal.Decimal(str(val))
+    decimal.getcontext().prec = num
+    return dec_form*1
 
 
 ###STYLE###
@@ -38,12 +35,13 @@ def predict_style_prob(img_file):
     prediction = style_learn.predict(open_image(img_file))
     probs_list = prediction[2].numpy()
     # format and round results
-    prob_sorted = sorted(probs_list, key=float, reverse=True)
-    prob_rounded = correct_round(prob_sorted, 2)
-    percent_dict = {
-        c: str(100*prob_rounded[i]) + "%" for (i, c) in enumerate(style_classes)}
+    probs_dict = {
+        c: probs_list[i] for (i, c) in enumerate(style_classes)}
+    sorted_dict = {
+        k:str(100*correct_round(v, 2)) + "%" 
+        for k,v in sorted(probs_dict.items(), key=lambda item: item[1], reverse=True)}
     percent_list = [str(i).replace(',', ':')
-                    for i in list(percent_dict.items())]
+                    for i in list(sorted_dict.items())]
     # only get the top 5 results and format as string
     top_five = str(percent_list[:5])
     special_chars = ['[', ']', "'", '"']
@@ -71,13 +69,14 @@ def predict_genre_prob(img_file):
     percent confidence. """
     prediction = genre_learn.predict(open_image(img_file))
     probs_list = prediction[2].numpy()
-    prob_sorted = sorted(probs_list, key=float, reverse=True)
     # format and round results
-    prob_rounded = correct_round(prob_sorted, 2)
-    percent_dict = {
-        c: str(100*prob_rounded[i]) + "%" for (i, c) in enumerate(genre_classes)}
+    probs_dict = {
+        c: probs_list[i] for (i, c) in enumerate(genre_classes)}
+    sorted_dict = {
+        k:str(100*correct_round(v, 2)) + "%" 
+        for k,v in sorted(probs_dict.items(), key=lambda item: item[1], reverse=True)}
     percent_list = [str(i).replace(',', ':')
-                    for i in list(percent_dict.items())]
+                    for i in list(sorted_dict.items())]
     # only get the top 5 results and format as string
     top_five = str(percent_list[:5])
     special_chars = ['[', ']', "'", '"']
@@ -105,13 +104,14 @@ def predict_artist_prob(img_file):
     """ Given an image, returns the top five artist predictions and their percent confidence. """
     prediction = artist_learn.predict(open_image(img_file))
     probs_list = prediction[2].numpy()
-    prob_sorted = sorted(probs_list, key=float, reverse=True)
     # format and round results
-    prob_rounded = correct_round(prob_sorted, 2)
-    percent_dict = {
-        c: str(100*prob_rounded[i]) + "%" for (i, c) in enumerate(artist_classes)}
+    probs_dict = {
+        c: probs_list[i] for (i, c) in enumerate(artist_classes)}
+    sorted_dict = {
+        k:str(100*correct_round(v, 2)) + "%" 
+        for k,v in sorted(probs_dict.items(), key=lambda item: item[1], reverse=True)}
     percent_list = [str(i).replace(',', ':')
-                    for i in list(percent_dict.items())]
+                    for i in list(sorted_dict.items())]
     # only get the top 5 results and format as string
     top_five = str(percent_list[:5])
     special_chars = ['[', ']', "'", '"']
