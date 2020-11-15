@@ -17,37 +17,48 @@
   <!--Step-by-step instructions panel-->
   <div class="panel" id="about">
     <h2>Instructions</h2>
+    <div class="panel-text">
     <p style="text-align: center;">Here are step-by-step instructions for how to use our website!<p>
     
     <h3>Step 1</h3>
-    <p>First, you choose which atributes you would like your image classified by. 
+    <p>First, you choose which attributes you would like your image classified by.
     You can choose any combination of style, genre, and artist. You must choose at least one though!</p>
+    </div>
     <img src="static/instructionImages/step1.png" class="instructions" alt="Choose Classification">
     
     <h3>Step 2</h3>
+    <div class="panel-text">
     <p>You can then choose which image you would like to classify. Click the Choose button to open the file explorer.</p>
+    </div>
     <img src="static/instructionImages/step2.png" class="instructions" alt="Choose Photo">
     
     <h3>Step 3</h3>
+    <div class="panel-text">
     <p>Once the file explorer opens, choose which photo you want to classify. You can only choose a single image at a time.
     You can only upload images of type png, jpg, jpeg, and gif. Any other type of file will cause an error and you will be asked to upload a different file.</p>
+    </div>
     <img src="static/instructionImages/step3.png" class="instructions" alt="File Explorer">
     
     <h3>Step 4</h3>
+    <div class="panel-text">
     <p>Now that you have choosen an image, you can run the model by clicking on the Run button! Our website will then classify the image by the catagories that you choose,
     in this case Artist.</p>
+    </div>
     <img src="static/instructionImages/step4.png" class="instructions" alt="Run Button">
     
     <h3>Step 5</h3>
+    <div class="panel-text">
     <p>Our website will then automatically scroll to the results at the bottom of the page. There will be results for each classiciation type that you choose, with classifications ranked in order of likelyhood.
     That is, in the example below our classifier believes that there is a 83% chance that the artist is Vincent van Gogh. We also provide images that are similar to the top classification identified by our model.
     We hope that you will discover new art that is similar to the one that you wanted to learn more about with our website!</p>
+    </div>
     <img src="static/instructionImages/step5.png" class="instructions" alt="Results">
   </div>
 
   <!--Classification Details-->
   <div class="panel" id="classification">
     <h2>More Classification Information</h2>
+    <div class="panel-text">
     <p>We trained our models on art from the WikiArt dataset on the ArtGAN Github, which can be found <a href="https://github.com/cs-chan/ArtGAN/tree/master/WikiArt%20Dataset">here</a>.
     This dataset has 27 different styles, 10 genres, and 23 artists. We have a limited number of classifications within each class due to needing a large number of photos for each
     classification in order to train a successful model.</p>
@@ -65,6 +76,7 @@
     Albrecht Durer, Boris Kustodiev, Camille Pissarro, Childe Hassam, Claude Monet, Edgar Degas, Eugene Boudin, Gustave Dore, Ilya Repin, Ivan Aivazovsky, Ivan Shishkin,
     John Singer Sargent, Marc Chagall, Martiros Saryan, Nicholas Roerich, Pablo Picasso, Pablo Cezanne, Pierre Auguste Penoir, Pyotr Konchalovsky, Raphael Kirchner, Rembrandt, Salvador Dali, and Vincent van Gogh.</p>
     <p>If you want even more information on the how this website is setup, check out our Github repository <a href="https://github.com/kiphenglim/FA20-CS121">here</a>.</p>
+    </div>
     
     <button class="button" style="margin-bottom: 4vh;" onclick="history.back()" type="submit">Back to Main Page</button>
 

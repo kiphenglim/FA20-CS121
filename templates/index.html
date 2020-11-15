@@ -21,33 +21,39 @@
   </header>
   <div class="panel" id="about">
     <h2>About</h2>
-    <p> Welcome to our art classification site! Upload a photo, choose how you want it to be classified, and our site will give you predictions about the categories your art could fall into and their probabilities.</p>
+    <div class="panel-text">
+    <p>Welcome to our art classification site! Upload a photo, choose how you want it to be classified, and our site will give you predictions about the categories your art could fall into and their probabilities.</p>
     <p> For more detailed instructions on how to use this website and information on our categorization and models <a href="{{ url_for('instructions') }}">click here</a>!</p>
+    </div>
   </div>
+
   <div class="panel" id="options">
     <h2>Options</h2>
-    <h4>Select classifications for your image:</h4>
-    <form class = check-boxes>
+    <h4>Select classification(s)</h4>
+    <div class="panel-text" style="width: 90%">
+    <form class="check-boxes">
       <input type="checkbox" id="style" name="style" value="style" onchange="updateBoxes('style','style2')">
       <label for="style"> Style</label><br>
-      <div style="font-size: 24px; margin-top: -1em;">
+      <div id="option-description">
         <p>Determined by characteristics of the piece (form, color, composition)
         <br>Examples: Realism, Cubism</p><br>
       </div>
       <input type="checkbox" id="genre" name="genre" value="genre" onchange="updateBoxes('genre','genre2')">
       <label for="genre"> Genre</label><br>
-      <div style="font-size: 24px; margin-top: -1em;">
+      <div id="option-description">
         <p>Determined by subject matter of a piece
         <br>Examples: Landscape, Still-Life</p><br>
       </div>
       <input type="checkbox" id="artist" name="artist" value="artist" onchange="updateBoxes('artist','artist2')">
       <label for="artist"> Artist</label>
-      <div style="font-size: 24px; margin-top: -1em;">
+      <div id="option-description">
         <p>Creators of pieces, whose pieces often have a signature look
         <br>Examples: van Gogh, Monet, Da Vinci</p>
       </div>
     </form>
+    </div>
   </div>
+
   <div class="panel" id="upload">
     <h2>Upload Your Painting</h2>    
     <form method=post enctype="multipart/form-data">
@@ -62,37 +68,39 @@
   
   <div class="panel" id="results">
     <h2>Results</h2>
+    <div class="panel-text">
     <div style="margin: auto;">
       <div class="floaty">
         {% if style_title != "": %}
-        <h3> {{ style_title }} </h3>
-        <p><em> {{ style_prediction }} </em></p>
-        <p> {{ style_probability }} </p>
+        <h4> {{ style_title }} </h4>
+        <p> {{ style_prediction }} </p>
+        <p><em> {{ style_probability }} </em></p>
         {% endif %}
         <br>
       </div>
   
       <div class="floaty">
         {% if genre_title != "": %}
-        <h3> {{ genre_title }} </h3>
-        <p><em> {{ genre_prediction }} </em></p>
-        <p> {{ genre_probability }} </p>
+        <h4> {{ genre_title }} </h4>
+        <p> {{ genre_prediction }} </p>
+        <p><em> {{ genre_probability }} </em></p>
         {% endif %}
         <br>
       </div>
   
       <div class="floaty">
         {% if artist_title != "": %}
-        <h3> {{ artist_title }} </h3>
-        <p><em> {{ artist_prediction }} </em></p>
-        <p> {{ artist_probability }} </p>
+        <h4> {{ artist_title }} </h4>
+        <p> {{ artist_prediction }} </p>
+        <p><em> {{ artist_probability }} </em></p>
         {% endif %}
         <br>
       </div>
-      <button class="button" style="margin-bottom: 4vh;" onclick="refresh()">Reset</button>
     </div>
-    
+    </div>
+    <button class="button" style="margin-bottom: 4vh;" onclick="refresh()">Reset</button>
   </div>
+
   <div class="panel" id="similar">
     <h2>Similar Paintings</h2>
     {% for img in similar_images: %}
