@@ -16,8 +16,8 @@
 {% endwith %}
 <body>
   <header>
-    <h1 style="color: white">Painting Classifier</h1>
-    <h5 style="margin: 10px; color: white"> Get to know your piece's style, genre, and artist</h5>
+    <h1>Painting Classifier</h1>
+    <h5"> Get to know your piece's style, genre, and artist</h5>
   </header>
   <div class="panel" id="about">
     <h2>About</h2>
@@ -26,23 +26,23 @@
   </div>
   <div class="panel" id="options">
     <h2>Options</h2>
-    <h4 style = "font-size: 30pt">Select classifications for your image:</h4>
-    <form class = check-boxes style="margin-left: -1em;font-size: 26pt">
+    <h4>Select classifications for your image:</h4>
+    <form class = check-boxes>
       <input type="checkbox" id="style" name="style" value="style" onchange="updateBoxes('style','style2')">
       <label for="style"> Style</label><br>
-      <div id="description" style="font-size: 18pt; margin-left: -1em; margin-right: 1em; margin-top: -1em">
+      <div style="font-size: 22px; margin-top: -1em;">
         <p>Determined by characteristics of the piece (form, color, composition)
         <br>Examples: Realism, Cubism</p><br>
       </div>
       <input type="checkbox" id="genre" name="genre" value="genre" onchange="updateBoxes('genre','genre2')">
       <label for="genre"> Genre</label><br>
-      <div id="description" style="font-size: 18pt; margin-left: -1em; margin-right: 1em; margin-top: -1em"">
+      <div style="font-size: 22px; margin-top: -1em;">
         <p>Determined by subject matter of a piece
         <br>Examples: Landscape, Still-Life</p><br>
       </div>
       <input type="checkbox" id="artist" name="artist" value="artist" onchange="updateBoxes('artist','artist2')">
       <label for="artist"> Artist</label>
-      <div id="description" style="font-size: 18pt; margin-left: -1em; margin-right: 1em; margin-top: -1em"">
+      <div style="font-size: 22px; margin-top: -1em;">
         <p>Creators of pieces, whose pieces often have a signature look
         <br>Examples: van Gogh, Monet, Da Vinci</p>
       </div>
@@ -62,7 +62,7 @@
   
   <div class="panel" id="results">
     <h2>Results</h2>
-    <div style="margin: auto;" >
+    <div style="margin: auto;">
       <div class="floaty">
         {% if style_title != "": %}
         <h3> {{ style_title }} </h3>
