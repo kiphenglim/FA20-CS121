@@ -26,7 +26,7 @@ def predict_style_category(img_file):
     """ Given an image file, returns the top style prediction. """
     prediction = style_learn.predict(open_image(img_file))
     prediction_key = style_classes[prediction[1].item()]
-    return "Predicted Category: " + str(prediction_key)
+    return "Predicted Category: " + str(prediction_key).replace('_', ' ')
 
 
 def predict_style_prob(img_file):
@@ -48,7 +48,7 @@ def predict_style_prob(img_file):
     for i in special_chars:
         top_five = top_five.replace(i, "")
 
-    return "Top 5 Probabilities: " + top_five
+    return "Top 5 Probabilities: " + top_five.replace('_', ' ')
 
 
 ##GENRE##
