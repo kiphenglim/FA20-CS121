@@ -25,11 +25,19 @@ h1 {
   margin:0;
   font-family: GTWalsheimBold;
 }
-h2, h3 {
-  font-family:GTWalsheimMedium;
+h2 {
+  font-family: GTWalsheimMedium;
+  text-align: center;
+  text-indent: 0vw;
+}
+h3 {
+  font-family: GTWalsheimMedium;
+  text-align: center;
+  margin-top:10vh;
+  text-indent: 0vw;
 }
 h4 {
-  font-size: 30pt;
+  font-size: 26pt;
   font-family:GTWalsheimMedium;
 }
 h5 {
@@ -37,7 +45,6 @@ h5 {
 }
 p {
   text-align: left;
-  padding-left: 4vw;
   font-family: GTWalsheimLight;
 }
 header {
@@ -57,11 +64,14 @@ header {
   float: left;
   font-size: 200%;
   border-radius: 15px;
-  padding-right: 1vw;
+}
+.panel-text {
+  text-align: left;
+  width: 95%;
+  margin: auto;
 }
 .check-boxes {
   text-align: left;
-  padding-left: 3vw;
 }
 .popup {
   margin: 0;
@@ -86,10 +96,16 @@ header {
   min-height: 92vh;
 }
 
+#option-description {
+  font-size: 24px;
+  margin-top: -1em;
+  padding-left: 2vw;
+}
+
 #upload {
   width: 46vw;
   margin-left: 2vw;
-  height: 92vh;
+  min-height: 92vh;
 }
 #results {
   width: 84vw;
@@ -101,6 +117,9 @@ header {
   width: 84vw;
   min-height: 40vh;
   margin-bottom: 8vh;
+}
+.instructions {
+  text-align: center;
 }
 .button {
   background-color: #6794AA; 
@@ -125,6 +144,7 @@ header {
 .invisible {
   width:0;
   height:0;
+  visibility: hidden;
 }
 .floaty {
   float: center;
@@ -132,11 +152,8 @@ header {
   margin-top: 0;
   text-align: center
 }
-h3 {
-  margin-top:0;
-}
 .similarIMG {
-  float: left;
+  float: center;
   margin-left: 5vw;
   margin-bottom: 5vh;
   max-width: 27vw;
