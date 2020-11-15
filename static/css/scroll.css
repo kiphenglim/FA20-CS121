@@ -1,20 +1,44 @@
 html {
   scroll-behavior: smooth;
 }
+@font-face {
+  font-family: GTWalsheimBold;
+  src: url(../fonts/GTWalsheimPro-Bold.ttf);
+  font-weight: normal;
+}
+@font-face {
+  font-family: GTWalsheimMedium;
+  src: url(../fonts/GTWalsheimPro-Medium.ttf);
+  font-weight: normal;
+}
+@font-face {
+  font-family: GTWalsheimLight;
+  src: url(../fonts/GTWalsheimPro-Light.ttf);
+  font-weight: normal;
+}
 body {
   margin:0px;
   background-color: #DDDAEE;
+  font-family: GTWalsheimMedium;
 }
 h1 {
   margin:0;
-  font-family:"Verdana", sans-serif;
+  font-family: GTWalsheimBold;
 }
-h2 {
-  font-family:"Verdana", sans-serif;
+h2, h3 {
+  font-family:GTWalsheimMedium;
+}
+h4 {
+  font-size: 30pt;
+  font-family:GTWalsheimMedium;
+}
+h5 {
+  font-family: GTWalsheimLight;
 }
 p {
   text-align: left;
   padding-left: 4vw;
+  font-family: GTWalsheimLight;
 }
 header {
   background-color: #6794AA;  
@@ -33,20 +57,19 @@ header {
   float: left;
   font-size: 200%;
   border-radius: 15px;
+  padding-right: 1vw;
 }
 .check-boxes {
   text-align: left;
-  padding-left: 5vw;
+  padding-left: 3vw;
 }
 .popup {
   margin: 0;
   padding: 20px;
-  background-color:#9782D2; /* Black w/ opacity */
-  position: fixed;
+  background-color:#9782D2; 
 }
 
 #about {
-  margin-top: 2em;
   width: 84vw;
   text-indent: 3vw;
 }
@@ -60,13 +83,7 @@ header {
   width: 34vw;
   margin-left: 8vw;
   margin-right: 2vw;
-  height: 92vh;
-}
-
-.description {
-  margin-left:-10vw;
-  margin-right: 5vw;
-  font-size: 12pt;
+  min-height: 92vh;
 }
 
 #upload {
@@ -86,7 +103,7 @@ header {
   margin-bottom: 8vh;
 }
 .button {
-  background-color: #6794AA; /* Green */
+  background-color: #6794AA; 
   border: none;
   color: white;
   padding: 15px 32px;
