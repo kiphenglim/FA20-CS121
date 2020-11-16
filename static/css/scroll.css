@@ -47,6 +47,7 @@ p {
   text-align: left;
   font-family: GTWalsheimLight;
 }
+
 header {
   background-color: #6794AA;  
   color: white;  
@@ -56,15 +57,24 @@ header {
   font-size: 200%;
   width: 100%;
 }
+
+.flex-container {
+  width: 100vw;
+  height: min-content;
+  display: -webkit-flex; /* Safari */
+  display: flex; /* standard */
+  justify-content: center;
+}
+
 .panel {
   background-color: white;
   text-align: center;
-  margin-left: 8vw;
-  margin-top: 8vh;
   float: left;
   font-size: 200%;
   border-radius: 15px;
+  margin: 2vw;
 }
+
 .panel-text {
   text-align: left;
   width: 95%;
@@ -90,10 +100,12 @@ header {
 }
 
 #options {
-  width: 34vw;
+  min-height: min-content;
+  -webkit-flex: 1; /* Safari */
+  -ms-flex: 1; /* IE 10 */
+  flex: 1; /* Standard syntax */
   margin-left: 8vw;
   margin-right: 2vw;
-  min-height: 92vh;
 }
 
 #option-description {
@@ -103,9 +115,12 @@ header {
 }
 
 #upload {
-  width: 46vw;
+  min-height: inherit;
+  -webkit-flex: 2; /* Safari */
+  -ms-flex: 2; /* IE 10 */
+  flex: 2; /* Standard syntax */
   margin-left: 2vw;
-  min-height: 92vh;
+  margin-right: 8vw;
 }
 #results {
   width: 84vw;

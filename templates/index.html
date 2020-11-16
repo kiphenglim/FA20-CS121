@@ -19,6 +19,8 @@
     <h1>Painting Classifier</h1>
     <h5 style="margin: 10px;"> Get to know your piece's style, genre, and artist</h5>
   </header>
+
+  <div class="flex-container">
   <div class="panel" id="about">
     <h2>About</h2>
     <div class="panel-text">
@@ -26,7 +28,9 @@
     <p> For more detailed instructions on how to use this website and information on our categorization and models <a href="{{ url_for('instructions') }}">click here</a>!</p>
     </div>
   </div>
+  </div>
 
+  <div class="flex-container">
   <div class="panel" id="options">
     <h2>Options</h2>
     <h4>Select classification(s)</h4>
@@ -65,7 +69,9 @@
     </form>
     <img src="{{ uploaded_image_path }}" id=uploaded_image alt="Uploaded Image" height="60%">
   </div>
-  
+  </div>
+
+  <div class="flex-container">
   <div class="panel" id="results">
     <h2>Results</h2>
     <div class="panel-text">
@@ -100,7 +106,9 @@
     </div>
     <button class="button" style="margin-bottom: 4vh;" onclick="refresh()">Reset</button>
   </div>
+  </div>
 
+  <div class="flex-container">
   <div class="panel" id="similar">
     <h2>Similar Paintings</h2>
     {% for img in similar_images: %}
@@ -111,6 +119,7 @@
       document.getElementById('{{ scroll }}').scrollIntoView();
     </script>
     {% endif %}
+  </div>
   </div>
   <script src="{{ url_for('static', filename='js/scripts.js')}}"></script>
 </body>
