@@ -64,10 +64,10 @@
       <input type="checkbox" class="invisible" id="style2" name="style2" value="style">
       <input type="checkbox" class="invisible" id="genre2" name="genre2" value="genre">
       <input type="checkbox" class="invisible" id="artist2" name="artist2" value="artist">
-      <input type="file" id="file" name="file">
+      <input type="file" id="file" name="file" onchange="updateImage(this)">
       <input  class="button" type=submit value="Upload and Run">
     </form>
-    <img src="{{ uploaded_image_path }}" id=uploaded_image alt="Uploaded Image" height="60%">
+    <img src="{{ uploaded_image_path }}" id="uploaded_image" alt="Uploaded Image" height="60%">
   </div>
   </div>
 
