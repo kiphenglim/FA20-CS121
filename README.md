@@ -27,15 +27,20 @@ repository. You can see our data preparation and training scripts.
 
 ## Acknowledgements
 
-We owe a huge thanks to our colleagues, professors, and grutors for
-being an immense resource during the development process. We also
-thank the authors of the ICIP2016 paper "Ceci n’est pas une pipe: A
-Deep ConvolutionalNetwork for Fine-art Paintings Classification" for
-providing the inspiration for this project. In particular, our
-gratitude goes to @cs-chan for providing the formatted source data for
-our training. Finally, we thank the WikiArt team for compiling a rich
-database of visual artworks that can be enjoyed by the public and used
-by researchers alike.
+We owe a huge thanks to our colleagues in CS121, Professor Z Sweedyk,
+and grutor Macy Mills for being immense resources during the
+development process.
+
+We also thank the authors of the ICIP2016 paper "Ceci n’est pas une
+pipe: A Deep ConvolutionalNetwork for Fine-art Paintings
+Classification" for providing the inspiration for this project. In
+particular, our gratitude goes to C.S. Chan for providing the
+formatted source data for our training, which can be accessed at the
+[cs-chan/ArtGAN](https://github.com/cs-chan/ArtGAN) repository.
+
+Finally, we thank the WikiArt team for compiling such a rich database
+of visual artworks that can be enjoyed by the public and used by
+researchers alike.
 
 
 ## Contributors
