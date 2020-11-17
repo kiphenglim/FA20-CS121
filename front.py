@@ -5,16 +5,17 @@ defines routes for our index.html and instructions.html pages.
 
 """
 
+import imghdr
+import os
+
 from flask import Flask, flash, request, redirect, render_template
 from flask_cors import CORS
-import imghdr
+import requests
+from werkzeug.utils import secure_filename
+
 from make_predictions import predict_artist_category, predict_artist_prob, \
 predict_genre_category, predict_genre_prob, predict_style_category, \
 predict_style_prob
-import os
-from PIL import Image
-import requests
-from werkzeug.utils import secure_filename
 
 UPLOAD_FOLDER = os.path.join('static', 'uploads')
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
@@ -75,9 +76,10 @@ def upload_file():
         if file.filename == '':
             flash('No selected file')
             flag=True
-        
+
         # Check if the user selected any options
-        if 'style2' not in request.form and 'genre2' not in request.form and 'artist2' not in request.form:
+        if 'style2' not in request.form and 'genre2' not in request.form and \
+        'artist2' not in request.form:
             flash('No options selected')
             flag=True
 
@@ -114,8 +116,8 @@ def upload_file():
                     similar_images += get_images(query)
 
                 return render_template("index.html", scroll="results", **locals())
-            else:
-                flash('Please check that your file has not been corrupted.')
+
+            flash('Please check that your file has not been corrupted.')
         else:
             flash('Please select a file with a .png, .jpg, or .jpeg extension')
     return render_template("index.html", **locals())
