@@ -42,7 +42,7 @@ def predict_style_prob(img_file):
     probs_dict = {
         c: probs_list[i] for (i, c) in enumerate(style_classes)}
     sorted_dict = {
-        k:str(100*correct_round(v, 2)) + "%"
+        k:str(100*correct_round(v, 3)) + "%" 
         for k,v in sorted(probs_dict.items(), key=lambda item: item[1], reverse=True)}
     percent_list = [str(i).replace(',', ':')
                     for i in list(sorted_dict.items())]
@@ -77,7 +77,7 @@ def predict_genre_prob(img_file):
     probs_dict = {
         c: probs_list[i] for (i, c) in enumerate(genre_classes)}
     sorted_dict = {
-        k:str(100*correct_round(v, 2)) + "%"
+        k:str(100*correct_round(v, 3)) + "%" 
         for k,v in sorted(probs_dict.items(), key=lambda item: item[1], reverse=True)}
     percent_list = [str(i).replace(',', ':')
                     for i in list(sorted_dict.items())]
@@ -98,7 +98,6 @@ artist_classes = artist_learn.data.classes
 
 def predict_artist_category(img_file):
     """ Given an image, returns the top artist prediction. """
-    print("prediction called *******")
     prediction = artist_learn.predict(open_image(img_file))
     prediction_key = artist_classes[prediction[1].item()]
     return "Predicted Category: " + str(prediction_key)
@@ -112,7 +111,7 @@ def predict_artist_prob(img_file):
     probs_dict = {
         c: probs_list[i] for (i, c) in enumerate(artist_classes)}
     sorted_dict = {
-        k:str(100*correct_round(v, 2)) + "%"
+        k:str(100*correct_round(v, 3)) + "%" 
         for k,v in sorted(probs_dict.items(), key=lambda item: item[1], reverse=True)}
     percent_list = [str(i).replace(',', ':')
                     for i in list(sorted_dict.items())]
