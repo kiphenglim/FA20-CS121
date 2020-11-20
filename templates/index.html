@@ -36,19 +36,19 @@
     <h4>Select classification(s)</h4>
     <div class="panel-text" style="width: 90%">
     <form class="check-boxes">
-      <input type="checkbox" id="style" name="style" value="style" onchange="updateBoxes('style','style2')">
+      <input type="checkbox" id="style" name="style" value="style" checked="True" onchange="updateBoxes('style','style2')">
       <label for="style"> Style</label><br>
       <div id="option-description">
         <p>Determined by characteristics of the piece (form, color, composition)
         <br>Examples: Realism, Cubism</p><br>
       </div>
-      <input type="checkbox" id="genre" name="genre" value="genre" onchange="updateBoxes('genre','genre2')">
+      <input type="checkbox" id="genre" name="genre" value="genre" checked="True" onchange="updateBoxes('genre','genre2')">
       <label for="genre"> Genre</label><br>
       <div id="option-description">
         <p>Determined by subject matter of a piece
         <br>Examples: Landscape, Still-Life</p><br>
       </div>
-      <input type="checkbox" id="artist" name="artist" value="artist" onchange="updateBoxes('artist','artist2')">
+      <input type="checkbox" id="artist" name="artist" value="artist" checked="True" onchange="updateBoxes('artist','artist2')">
       <label for="artist"> Artist</label>
       <div id="option-description">
         <p>Creators of pieces, whose pieces often have a signature look
@@ -61,13 +61,13 @@
   <div class="panel" id="upload">
     <h2>Upload Your Painting</h2>    
     <form method=post enctype="multipart/form-data">
-      <input type="checkbox" class="invisible" id="style2" name="style2" value="style">
-      <input type="checkbox" class="invisible" id="genre2" name="genre2" value="genre">
-      <input type="checkbox" class="invisible" id="artist2" name="artist2" value="artist">
+      <input type="checkbox" class="invisible" id="style2" name="style2" value="style" checked="True">
+      <input type="checkbox" class="invisible" id="genre2" name="genre2" value="genre" checked="True">
+      <input type="checkbox" class="invisible" id="artist2" name="artist2" value="artist" checked="True">
       <input type="file" id="file" name="file" onchange="updateImage(this)">
-      <input  class="button" type=submit value="Upload and Run">
+      <input  class="button" type=submit value="Run">
     </form>
-    <img src="{{ uploaded_image_path }}" id="uploaded_image" alt="Uploaded Image" height="60%">
+    <img src="{{ sample_image_path }}" id="uploaded_image" alt="Uploaded Image" height="60%">
   </div>
   </div>
 

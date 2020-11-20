@@ -5,7 +5,7 @@ Harvey Mudd College FA20 CS121 Section 2: Deep Learning Classification of Art Pi
 
 
 ## About
-[Image Classifier](https://arctic-anvil-294604.wn.r.appspot.com/) is a web app created for the purpose of classifying images. Our target audience is art students who are learning how to identify art on their own, or aspiring artists who are curious about what their painting would be classified as. The web app uses trained convolutional neural network models to classify the Style, Artist, and Genre of an art piece. 
+[Painting Classifier](https://arctic-anvil-294604.wn.r.appspot.com/) is a web app created for the purpose of classifying images. Our target audience is art students who are learning how to identify art on their own, or aspiring artists who are curious about what their painting would be classified as. The web app uses trained convolutional neural network models to classify the Style, Artist, and Genre of an art piece. 
 
 Once the models have classified the painting, the app displays the results and the confidence level for each result. In addition, it uses a [Google Custom Search](https://developers.google.com/custom-search/v1/overview) API to find other similar paintings in the same categories.
 
@@ -32,7 +32,7 @@ and grutor Macy Mills for being immense resources during the
 development process.
 
 We also thank the authors of the ICIP2016 paper "Ceci n’est pas une
-pipe: A Deep ConvolutionalNetwork for Fine-art Paintings
+pipe: A Deep Convolutional Network for Fine-art Paintings
 Classification" for providing the inspiration for this project. In
 particular, our gratitude goes to C.S. Chan for providing the
 formatted source data for our training, which can be accessed at the
