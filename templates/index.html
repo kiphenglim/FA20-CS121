@@ -111,6 +111,10 @@
   <div class="flex-container">
   <div class="panel" id="similar">
     <h2>Similar Paintings</h2>
+    <p style="text-align: center; font-size: 18pt">
+      Here is a custom Google Images search for your predicted
+      classes.
+    </p>
     {% for img in similar_images: %}
     <img class="similarIMG" src="{{ img }}">
     {% endfor %}

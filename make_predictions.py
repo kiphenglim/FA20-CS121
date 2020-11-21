@@ -42,7 +42,7 @@ def predict_style_prob(img_file):
     probs_dict = {
         c: probs_list[i] for (i, c) in enumerate(style_classes)}
     sorted_dict = {
-        k:str(100*correct_round(v, 3)) + "%" 
+        k:str(100*correct_round(v, 3)) + "%"
         for k,v in sorted(probs_dict.items(), key=lambda item: item[1], reverse=True)}
     percent_list = [str(i).replace(',', ':')
                     for i in list(sorted_dict.items())]
@@ -77,7 +77,7 @@ def predict_genre_prob(img_file):
     probs_dict = {
         c: probs_list[i] for (i, c) in enumerate(genre_classes)}
     sorted_dict = {
-        k:str(100*correct_round(v, 3)) + "%" 
+        k:str(100*correct_round(v, 3)) + "%"
         for k,v in sorted(probs_dict.items(), key=lambda item: item[1], reverse=True)}
     percent_list = [str(i).replace(',', ':')
                     for i in list(sorted_dict.items())]
@@ -111,7 +111,7 @@ def predict_artist_prob(img_file):
     probs_dict = {
         c: probs_list[i] for (i, c) in enumerate(artist_classes)}
     sorted_dict = {
-        k:str(100*correct_round(v, 3)) + "%" 
+        k:str(100*correct_round(v, 3)) + "%"
         for k,v in sorted(probs_dict.items(), key=lambda item: item[1], reverse=True)}
     percent_list = [str(i).replace(',', ':')
                     for i in list(sorted_dict.items())]
