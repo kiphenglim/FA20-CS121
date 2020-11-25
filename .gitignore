@@ -7,3 +7,5 @@ __pycache__/inference.cpython-37.pyc
 *.pyc
 *.DS_Store
 
+# Application sensitive files
+custom_search.py

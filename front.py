@@ -13,6 +13,7 @@ from flask_cors import CORS
 import requests
 from werkzeug.utils import secure_filename
 
+from custom_search import get_images
 from make_predictions import predict_artist_category, predict_artist_prob, \
 predict_genre_category, predict_genre_prob, predict_style_category, \
 predict_style_prob
@@ -25,7 +26,6 @@ app = Flask(__name__)
 CORS(app, support_credentials=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
-
 app.debug = True
 
 
@@ -121,18 +121,3 @@ def upload_file():
         else:
             flash('Please select a file with a .png, .jpg, or .jpeg extension')
     return render_template("index.html", **locals())
-
-
-### Google API helper ###
-def get_images(query):
-    """ Google API helper. Given a string query, returns a Google image search for that query. """
-    results = []
-    req = requests.get('https://www.googleapis.com/customsearch/v1?'+
-    'key=AIzaSyCz6lKIdLg3fIHmKi1ZzhQ4OXafiXycBgE&cx=23cebd78935069e14&' +
-    'searchType=image&num=3&q='+query).json()
-
-    if 'searchInformation' in req and req["searchInformation"]["totalResults"] != "0":
-        for img in req["items"]:
-            results.append(img["link"])
-
-    return results
